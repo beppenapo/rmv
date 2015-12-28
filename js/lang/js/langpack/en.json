@@ -1,0 +1,18 @@
+{
+	"token": {
+		"MUSEI":"NETWORK MUSEUM",
+		"mappa":"map",
+		"accedi alla mappa":"view map",
+		"punti":"poi",
+		"visualizza la lista completa dei punti di interesse":"view all point of interest",
+		"La mappa":"Map",
+		"Il database":"Database",
+		"Il progetto":"About the project"
+		
+	},
+	"regex": [
+		["Budget", "งบประมาณ"],
+		["^Something at start of text", ""],
+		["This will be case insensitive", "i", ""]
+	]
+}

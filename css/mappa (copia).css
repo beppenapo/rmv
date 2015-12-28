@@ -1,0 +1,241 @@
+header#head{position:absolute;top:0;left:0;width:100%;height:5%;margin:0px auto;background-color:rgba(170,25,26,0.7);z-index:1000;-webkit-box-shadow: 0 5px 10px #aaa;-moz-box-shadow: 0 5px 10px #aaa;box-shadow: 0 5px 10px #aaa;
+/*
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2FhMTkxYSIgc3RvcC1vcGFjaXR5PSIwLjY1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(170,25,26,0.65) 0%, rgba(0,0,0,0) 100%); 
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(170,25,26,0.65)), color-stop(100%,rgba(0,0,0,0))); 
+background: -webkit-linear-gradient(top,  rgba(170,25,26,0.65) 0%,rgba(0,0,0,0) 100%); 
+background: -o-linear-gradient(top,  rgba(170,25,26,0.65) 0%,rgba(0,0,0,0) 100%);
+background: -ms-linear-gradient(top,  rgba(170,25,26,0.65) 0%,rgba(0,0,0,0) 100%); 
+background: linear-gradient(to bottom,  rgba(170,25,26,0.65) 0%,rgba(0,0,0,0) 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6aa191a', endColorstr='#00000000',GradientType=0 ); 
+*/
+}
+#headLeft{width: 40%;height:100%;float: left;}
+#headLeft h1{font-size: 150%;line-height:120%;font-family:'Oswald', sans-serif;font-weight:bold; color:#fff;}
+#headLeft img{float:left; margin:0px 10px 0px 30px; height:90%}
+header nav{width: 35%; height:100%;float:right;}
+header nav ul{width:100%;margin:0px; padding:0;list-style-type: none;text-align: center;}
+header li{display: inline-block;margin:0px -2px;}
+header nav a{text-decoration: none;display: block;padding:8px 10px;color:#fff;}
+header nav a:hover{background-color:rgba(170,25,26,1);}
+/**************  CONTENITORI PRINCIPALI *******************************/
+div#map{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%; 
+  height:100%;
+  margin:0px auto; 
+  padding:0px;
+  z-index:1;
+}
+div#page_wrap{ margin:0px auto; padding:0px;}
+
+
+/**************  MENU ORIZZONTALE *******************************/
+div#menuMappa{
+   position: absolute;
+   top:0px;
+   left:0px;
+   width:10%; 
+   height: auto;
+   background-color: transparent;
+   z-index:1000;
+   padding:2px 0px;
+}
+div#menuMappa ul{width:100%; margin:0px auto;}
+div#menuMappa li{
+   /*float:left;*/
+   list-style-type: none;
+   text-align: center;
+   margin:0px 5px 1px -150px;
+   line-height: 3em;
+   width:200px;
+   height: 50px;
+   background-color: rgba(0,0,0,0.7);
+   -webkit-transition: margin 0.5s linear;
+   -moz-transition: margin 0.5s linear;
+   -ms-transition: margin 0.5s linear;
+   -o-transition: margin 0.5s linear;
+   transition: margin 0.5s linear;
+   -webkit-border-top-right-radius: 5px;
+   -webkit-border-bottom-right-radius: 5px;
+   -moz-border-radius-topright: 5px;
+   -moz-border-radius-bottomright: 5px;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
+}
+div#menuMappa li:hover, .attivo{margin:0px 5px 1px 0px;}
+div#menuMappa a{color:#fff;}
+div#menuMappa img{vertical-align: middle; float:right; padding:5px;}
+
+h1.h1popup{font-size:14px;font-weight:bold;border-bottom:1px solid orange}
+li.popup{margin-top:5px; font-size:10px;width:300px;}
+
+/*********************MENU DESTRO - CARTE E RICERCHE********************/
+div#bloccoWrap {
+ position: absolute;
+ /*
+ font-family: "Lucida Grande", Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+ color: #222;
+ */
+ font-size: 80%;
+ top: 2px;
+ right: 0px;
+ width: 170px;
+ height: auto !important;
+ margin: 0px auto;
+ overflow:inherit;
+ z-index: 1000;
+ background: rgba(255,255,255,0.4);
+ padding:3px;
+}
+div#blocco_layers{
+ background-color: rgba(0, 0, 0, 0.699219);
+ /*border: 2px solid brown;*/
+ padding: 2px;
+}
+
+div#bloccoWrap, div#blocco_layers, div#bl_logo{
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+}
+
+/*
+div#bl_baselayers h1{font-size: 13px; color: blue; text-align: center; padding: 5px;}
+div#bl_overlayers h2{font-size: 13px; color: blue; text-align: center; padding: 5px;}
+div#bl_overlayers h3{font-size: 12px; color: red; text-align: center; padding: 5px;}
+*/
+div.sezLayer{
+ width:95%;
+ margin:3px;
+ padding:0px;
+}
+h1.titoloSezione{
+   -webkit-border-top-right-radius: 5px;
+   -webkit-border-top-left-radius: 5px;
+   -moz-border-radius-topright: 5px;
+   -moz-border-radius-topleft: 5px;
+   border-top-right-radius: 5px;
+   border-top-left-radius: 5px;
+}
+
+h1.titoloSezione{
+   color: #942718; 
+   font-weight: bold;
+   background-color:rgba(255,255,255,0.8);
+   padding:2px 5px;
+}
+div#overlayers{
+ margin:1px 1px 1px 1px;
+ padding:0px;
+ border:1px solid #67573F;
+ overflow:hidden;
+}
+div#tipi_ricerche, li.layerList{cursor:pointer;}
+div.layers{
+ margin:0px; 
+ padding:5px; 
+ color:white;
+ border:1px solid #D9DAD9;
+ -webkit-border-bottom-right-radius: 5px;
+ -webkit-border-bottom-left-radius: 5px;
+ -moz-border-radius-bottomright: 5px;
+ -moz-border-radius-bottomleft: 5px;
+ border-bottom-right-radius: 5px;
+ border-bottom-left-radius: 5px;
+}
+
+
+/*div.layers {border:1px solid #67573F; margin:-1px 2px; padding: 5px 5px;}
+div.baselayers:hover{background-color:#CFC4B1; cursor:pointer;}
+div.overlayers:hover{background-color:#CFC4B1; cursor:pointer;}*/
+
+div#bl_logo{
+  /*
+	position: relative;	
+	padding: 8px;
+	left: 20px;
+  */
+  width:160px;
+  margin:1px auto !important;
+  text-align: center;
+  background-color:white; 
+}
+	
+li#icoarearch {list-style-position:inside; list-style-image:url('../img/ico_mappa/area_arch.png'); line-height: 25px;}
+li#icomusei {list-style-position:inside; list-style-image:url('../img/ico_mappa/musei.png'); line-height: 25px;}
+li#icopalazzo {list-style-position:inside; list-style-image:url('../img/ico_mappa/palazzo.png'); line-height: 25px;}
+li#icoattpro {list-style-position:inside; list-style-image:url('../img/ico_mappa/att_produttiva.png'); line-height: 25px;}
+li#icostrdif {list-style-position:inside; list-style-image:url('../img/ico_mappa/strutt_dif.png'); line-height: 25px;}
+li#icochiesa {list-style-position:inside; list-style-image:url('../img/ico_mappa/chiesa.png'); line-height: 25px;}
+li#icocisterna {list-style-position:inside; list-style-image:url('../img/ico_mappa/cisterna.png'); line-height: 25px;}
+
+div.layers label {font-size: 11px; font-family: Sans-Serif; color: white; text-shadow: black; text-align: left; padding: 0px; }
+
+div#mapPanel{
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ right: 0px;
+ margin-left: auto !important;
+ margin-right: auto !important;
+ /*width: auto !important;
+ height:100px;
+ text-align: center;*/
+ background: rgba(255,255,255,0.4);
+ -webkit-border-bottom-right-radius: 5px;
+ -webkit-border-bottom-left-radius: 5px;
+ -moz-border-radius-bottomright: 5px;
+ -moz-border-radius-bottomleft: 5px;
+ border-bottom-right-radius: 5px;
+ border-bottom-left-radius: 5px;
+ padding: 1px 2px;
+ z-index: 1000;
+}
+
+.mapButton{
+   /*position:absolute;
+   top:5px;
+   left:100px;*/
+   width:20px !important;
+   height:20px !important;
+   display: inline-block !important;
+   padding: 12px !important;
+   text-align: center !important;
+   color:#fff !important;
+   margin:1px !important;
+   background-color: rgba(0, 0, 0, 0.699219) !important;
+   cursor:pointer !important;
+   -webkit-transition: background 0.5s linear;
+   -moz-transition: background 0.5s linear;
+   -ms-transition: background 0.5s linear;
+   -o-transition: background 0.5s linear;
+   transition: background 0.5s linear;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+#customZoomIn{background: url('../img/ico_mappa/zoom_in.png') no-repeat center;} 
+#customZoomOut{background: url('../img/ico_mappa/zoom_out.png') no-repeat center;}
+#customZoomIn,#customZoomOut{float:left;}
+#max,#geoloc{height:35px;width:35px;margin:-7px;}
+#max{background: url('../img/ico_mappa/zoom_mondo.png') no-repeat center;}
+#geoloc{background: url('../img/ico_mappa/geoloc.png') no-repeat center;} 
+
+/*
+div#max img{position: absolute; top: 5px; left: 597px;}
+div#geoloc img{position: absolute;top: 3px; left: 651px;}
+div.olControlZoom a{padding:12px 14px !important;}
+div.olControlZoom {top:1px !important; left:-3px !important;}
+*/
+
+.mapButton{
+  background: #000000 !important; /* fallback for IE */ 
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+.mapButton:hover{
+   background: #000000 !important; /* fallback for IE */ 
+   background: rgba(0, 0, 0, 1) !important;
+}
