@@ -14,52 +14,52 @@ $( "#comuneList" ).autocomplete({
        url: "inc/dinSelLocalita.php",
        data: {id:ui.item.gid},
        cache: false,
-       success: function(html){$("#localita").removeAttr('disabled').html(html);} 
+       success: function(html){$("select[name=localita]").removeAttr('disabled').html(html);} 
       });//ajax      
     },
     open: function(){$('.ui-menu .ui-menu-item a').removeClass('ui-corner-all');}
   });
-  $("#localita").change(function() {
+  $("select[name=localita]").change(function() {
     var id = $(this).val();
     $.ajax({
      type: "POST",
      url: "inc/dinSelToponimo.php",
      data: {id:id},
      cache: false,
-     success: function(html){$("#toponimo").removeAttr('disabled').html(html);} 
+     success: function(html){$("select[name=toponimo]").removeAttr('disabled').html(html);} 
     });//ajax
    });
-  $("#toponimo").change(function() {
+  $("select[name=toponimo]").change(function() {
     var id = $(this).val();
     $.ajax({
      type: "POST",
      url: "inc/dinSelMicrotoponimo.php",
      data: {id:id},
      cache: false,
-     success: function(html){$("#microtoponimo").removeAttr('disabled').html(html);} 
+     success: function(html){$("select[name=microtoponimo]").removeAttr('disabled').html(html);} 
     });//ajax
    });
-  $("#def_gen").change(function() {
+  $("select[name=def_gen]").change(function() {
     var id = $(this).val();
     var selected = $(this).find('option:selected');
     var ico = selected.data('ico');
-    $('#ico').val(ico); 
+    $('input[name=ico]').val(ico); 
     $.ajax({
      type: "POST",
      url: "inc/dinSelDefinizioni.php",
      data: {id:id},
      cache: false,
-     success: function(html){$("#def_spec").removeAttr('disabled').html(html);} 
+     success: function(html){$("select[name=def_spec]").removeAttr('disabled').html(html);} 
     });//ajax
    });
-  $("#materiale").change(function() {
+  $("select[name=materiale]").change(function() {
     var id = $(this).val();
     $.ajax({
      type: "POST",
      url: "inc/dinSelTecnica.php",
      data: {id:id},
      cache: false,
-     success: function(html){$("#tecnica").removeAttr('disabled').html(html);} 
+     success: function(html){$("select[name=tecnica]").removeAttr('disabled').html(html);} 
     });//ajax
    });
    

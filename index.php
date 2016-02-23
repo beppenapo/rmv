@@ -5,17 +5,8 @@ require("inc/db.php");
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8" />
-<meta name="generator" content="gedit" >
-<meta name="author" content="Giuseppe Naponiello" >
-<meta name="robots" content="INDEX,FOLLOW" />
-<meta name="copyright" content="&copy;2014 Rete Museale del Valdarno" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="css/responsive.css" rel="stylesheet" media="screen" />
+<?php require("inc/meta.php"); ?>
 <link href="js/flexslider/flexslider.css" rel="stylesheet" media="screen" />
-
-<title>Rete Museale del Valdarno di sotto</title>
- 
 </head>
 <body>
  <header id="head"><?php require_once('inc/head.php')?></header>

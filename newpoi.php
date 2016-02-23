@@ -179,7 +179,7 @@ require_once("inc/db.php");
          }
        ?>
       </select>
-      <input type="hidden" id="ico" value='' />
+      <input type="hidden" name="ico" id="ico" value='' />
      </td>
     </tr>
     <tr>
@@ -608,7 +608,7 @@ function onTriggerInsertar(fid){
    miFeature.attributes.id_stato_conservazione = $('#conservazione').val();
    miFeature.attributes.id_materiale = $('#materiale').val();
    miFeature.attributes.id_tecnica = $('#tecnica').val();
-   miFeature.attributes.id_icone = $('#ico').val();
+   miFeature.attributes.id_icone = $('input[name=ico]').val();
    miFeature.attributes.data_compilazione = $('#data_compilazione').val();
    miFeature.attributes.id_compilatore = $('#id_compilatore').val();
    miFeature.attributes.note = $('#note').val();
@@ -642,7 +642,7 @@ function onTriggerUpdate(){
    miFeature[0].attributes.id_stato_conservazione = $('#conservazione').val();
    miFeature[0].attributes.id_materiale = $('#materiale').val();
    miFeature[0].attributes.id_tecnica = $('#tecnica').val();
-   miFeature[0].attributes.id_icone = $('#ico').val();
+   miFeature[0].attributes.id_icone = $('input[name=ico]').val();
    miFeature[0].attributes.data_compilazione = $('#data_compilazione').val();
    miFeature[0].attributes.id_compilatore = $('#id_compilatore').val();
    miFeature[0].attributes.note = $('#note').val();

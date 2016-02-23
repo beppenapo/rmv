@@ -8,6 +8,11 @@
 html{font-family: 'Telex', sans-serif;color:#424242;}
 a{color:#907575;}
 a:hover{color:#514F4F;}
+input[type="submit"]{cursor:pointer;}
+select{background:#fff;}
+select:disabled {background-color: #dddddd !important;}
+.error{width:80%;margin:0px auto; color:red;}
+.errorClass{border:1px solid red !important;box-shadow: 0px 0px 15px #ff0000;}
 #head{position:relative;width:100%;margin: 0px auto;padding:0px;color:#7E7E7E;background-color:rgb(237,237,237);text-align:center;}
 #head img#logo{display:none}
 #head li, footer #navFooter li{display:inline-block;text-align:center;}
@@ -23,7 +28,8 @@ a:hover{color:#514F4F;}
 #head li.txt > a:hover{background-color:#A42929; color:#fff;}
 #wrapHead img{display:none;}
 #wrapMain{position: relative;width: 100%;min-height:100%;height: 100%;}
-
+.mediumDesc{height:50px !important;}
+.longDesc{height:100px !important;}
 .overlayDiv{position:absolute;top:0;left:0;width:100%;height:100%;background: rgba(71,47,36,0.4) url("../img/pattern-filter.png") repeat top left;}
 .container{position:absolute;top:10%;left:10%;bottom:10%;right:10%;max-width:1000px;padding:0 3%;margin:0 auto;color: #fff;overflow: hidden;-webkit-transform: translateZ(0);}
 .container h1{display:block;border-bottom:1px solid #fff;margin-bottom:2%;width:80%;font-size:0.6em;}
@@ -82,11 +88,12 @@ a.button:hover{background:#A42929; color:#fff;}
 
 /* gestione jquery */
 .ui-helper-hidden-accessible{display:none;}
-.ui-autocomplete { height: 200px; width:30% !important;overflow-y: scroll; overflow-x: hidden;}
+.ui-autocomplete { max-height: 200px; width:30% !important;overflow-y: scroll; overflow-x: hidden;}
 .ui-autocomplete li{width:100%;background-color:#eeeeec !important;border-bottom:1px solid #fff;padding:5px 10px;}
 .ui-autocomplete li:hover{background-color:#fff !important;}
-.ui-autocomplete li a{color:#000 !important;}
+.ui-autocomplete li a{color:#000 !important;font-size:0.75em !important;}
 .ui-autocomplete li a:hover{background:none !important;cursor:default !important;}
+.ui-helper-hidden-accessible{display:none !important;}
 /* classi generiche applicabili a qualsiasi oggetto*/
 .active{background-color:rgb(10,0,98) !important; color:#fff !important; cursor:default;}
 .layerActive{color:#A42929;font-weight:bold;}
@@ -121,7 +128,10 @@ a.button:hover{background:#A42929; color:#fff;}
 #filtri i {padding: 10.5px;border-right: 1px solid grey;border-top: 1px solid grey;border-bottom: 1px solid grey;border-left: none;margin-left: -5px;vertical-align: middle;cursor:pointer;border-radius:0px 5px 5px 0px;}
 
 /* poi */
-.wrapThumb { float: left; width: 45%; /*height: 132px;*/ margin: 1%;}
+.wrapThumb { display: inline-block; width: 45%; vertical-align:top; margin: 1%;}
+.photoTool{position:absolute;top:0px;width:43%;background:rgba(0,0,0,0.3);margin:1%;text-align: right;z-index:1000;}
+.photoTool a{font-size: 1.3em; color:#1F1F1F;padding:3px 5px; vertical-align:middle;}
+.photoTool a:hover{color:#000;}
 #photoContent{width:100%;height:auto;display:block;}
 #infoContent{width:100%}
 #infoContent span{display:inline-block;}
@@ -132,60 +142,73 @@ a.button:hover{background:#A42929; color:#fff;}
 
 /* Tablets */
 @media only screen and (min-width:481px) and (max-width:1024px) {
- #head{display:inline-block;text-align:left;}
- #head h1{font-size:150%;padding:2% 0%;}
- #head nav{width:30%;float:right;clear:none;}
- #wrapHead{width:55%;float:left;padding-left:5%;}
- #wrapHead img{display:inline;float:left;margin-right:10px;}
- .wrapContent{width:95%;}
- .container h1{font-size:2em;}
- .container p{font-size:1em;}
- .container .containerFooter{display:inline;position:absolute;bottom:2%;right:5%;font-size:0.750em;}
- #mainContentWrap section{float:left;width:30%;}
- #mainContentWrap section:nth-child(2){padding:0 5%;}
- #nav{clear:both;}
- #mainContentWrap section{clear:none;}
- #nav{padding: 20px 0px;position: relative;background: #d2d2d2;display: inline-block;width:106%;margin:0 -3% -53px;border-bottom:1px dotted #6e6c6c;}
- #nav #loginWrap{width:69%;padding-right:1%}
- #nav #loginWrap div{display:inline-block;vertical-align:top;width:31%;}
- #nav #loginWrap div:nth-child(2){padding:0 2%;}
- #nav #navLink{width:28%}
- .wrapThumb { float: left; width: 25%; /*height: 132px;*/ margin: 0.3%;}
- #infoContent .key{width:29%;margin-right:1%;}
- #infoContent .value{width:70%;}
+    #head{display:inline-block;text-align:left;}
+    #head h1{font-size:150%;padding:2% 0%;}
+    #head nav{width:30%;float:right;clear:none;}
+    #wrapHead{width:55%;float:left;padding-left:5%;}
+    #wrapHead img{display:inline;float:left;margin-right:10px;}
+    .wrapContent{width:95%;}
+    .container h1{font-size:2em;}
+    .container p{font-size:1em;}
+    .container .containerFooter{display:inline;position:absolute;bottom:2%;right:5%;font-size:0.750em;}
+    #mainContentWrap section{float:left;width:30%;}
+    #mainContentWrap section:nth-child(2){padding:0 5%;}
+    #nav{clear:both;}
+    #mainContentWrap section{clear:none;}
+    #nav{padding: 20px 0px;position: relative;background: #d2d2d2;display: inline-block;width:106%;margin:0 -3% -53px;border-bottom:1px dotted #6e6c6c;}
+    #nav #loginWrap{width:69%;padding-right:1%}
+    #nav #loginWrap div{display:inline-block;vertical-align:top;width:31%;}
+    #nav #loginWrap div:nth-child(2){padding:0 2%;}
+    #nav #navLink{width:28%}
+    .wrapThumb { display:inline-block; width: 25%; vertical-align:top; margin: 0.3%;}
+    .photoTool{position:absolute;top:0px;width:24.6%;background:rgba(0,0,0,0.3);margin:0.3%;text-align: right;z-index:1000;}
+    .photoTool a{font-size: 1.3em; color:#1F1F1F;padding:3px 5px; vertical-align:middle;}
+    .photoTool a:hover{color:#000;}
+    #infoContent .key{width:29%;margin-right:1%;}
+    #infoContent .value{width:70%;}
 }
 /* 
 
 
 /* pc */
 @media screen and (min-width: 1025px){
- #head{display:inline-block;text-align:left;}
- #head img#logo { display: inline; height: 50px !important; padding: 1.5% 0px;}
- #head h1{font-size:150%;padding:3% 0%;}
- #head a{line-height:300%;}
- #head nav{width:30%;float:right;clear:none;}
- #wrapHead{width:55%;float:left;padding-left:5%;}
- #wrapHead img{display:inline;float:left;margin-right:10px;}
- .container h1{font-size:2em;width:80%}
- .container p{font-size:1em;width:50%;}
- .container .containerFooter{display:inline;position:absolute;bottom:2%;right:5%;font-size:0.750em;}
- footer #navFooter li{width:6%;}
- .wrapContent{width:80%;}
- .intro .colSx{display:inline;position:relative;width:40%;float:left;text-align:center;}
- .intro .colSx img{width:50%;}
- .intro .colDx{width:60%;float:left;}
- #mainContentWrap{width:80%; float:left;}
- #mainContentWrap section{float:left;width:30%;}
- #mainContentWrap section:nth-child(2){padding:0 5%;}
- #nav{float:right;width:17%;padding-left:1%;border-left:1px dotted #424242;}
- #mainContentWrap section, #nav{clear:none;}
- #nav section {clear:both;width: 100%;margin:0px;padding:0px;}
- footer{margin-top:100px;}
- #nav h1{margin:15px 0px 5px;font-size:0.9em; border-bottom:1px dotted #424242; padding:5px 0px;}
- #nav a{font-size:0.75em;display:block;padding:3px 0px;}
- form[name=login] input{width:10em;}
- form[name=login] input[type=submit]{width:12.5em;}
- #infoContent .key{width:20%;margin-right:1%;}
- #infoContent .value{width:79%;}
- .wrapThumb { float: left; width: 25%; /*height: 132px;*/ margin: 0.3%;}
- #divFotoDialog{position: absolute; left: 30%; width: 30%; padding: 2%; background: #fff; border: 1px solid #888;}
+    #head{display:inline-block;text-align:left;}
+    #head img#logo { display: inline; height: 50px !important; padding: 1.5% 0px;}
+    #head h1{font-size:150%;padding:3% 0%;}
+    #head a{line-height:300%;}
+    #head nav{width:30%;float:right;clear:none;}
+    #wrapHead{width:55%;float:left;padding-left:5%;}
+    #wrapHead img{display:inline;float:left;margin-right:10px;}
+    .container h1{font-size:2em;width:80%}
+    .container p{font-size:1em;width:50%;}
+    .container .containerFooter{display:inline;position:absolute;bottom:2%;right:5%;font-size:0.750em;}
+    footer #navFooter li{width:6%;}
+    .wrapContent{width:80%;}
+    .intro .colSx{display:inline;position:relative;width:40%;float:left;text-align:center;}
+    .intro .colSx img{width:50%;}
+    .intro .colDx{width:60%;float:left;}
+    #mainContentWrap{width:80%; float:left;}
+    #mainContentWrap section{float:left;width:30%;}
+    #mainContentWrap section:nth-child(2){padding:0 5%;}
+    #nav{float:right;width:17%;padding-left:1%;border-left:1px dotted #424242;}
+    #mainContentWrap section, #nav{clear:none;}
+    #nav section {clear:both;width: 100%;margin:0px;padding:0px;}
+    footer{margin-top:100px;}
+    #nav h1{margin:15px 0px 5px;font-size:0.9em; border-bottom:1px dotted #424242; padding:5px 0px;}
+    #nav a{font-size:0.75em;display:block;padding:3px 0px;}
+    form[name=login] input{width:10em;}
+    form[name=login] input[type=submit]{width:12.5em;}
+    #infoContent .key{width:20%;margin-right:1%;}
+    #infoContent .value{width:79%;}
+    .wrapThumb { display: inline-block; width: 25%; vertical-align:top; margin: 0.3%;}
+    .photoTool{position:absolute;top:0px;width:24.6%;background:rgba(0,0,0,0.3);text-align: right;margin:0.3%;z-index:1000;}
+    .photoTool a{font-size: 1.3em; color:#1F1F1F;padding:3px 5px; vertical-align:middle;}
+    .photoTool a:hover{color:#000;}
+    .myDialog{position:fixed;top:0 !important;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3);margin:0px auto;display:none;z-index:2000;}
+    .myDialog form span{display:block; width:100%; text-align:center;color:red;}
+    .myDialogWrapContent{position:absolute; top:10%;width:100%; margin:0px auto; }
+    .myDialogContent{position:relative;background:#fff;width:600px; height:550px; margin:0px auto;}
+    .myDialogContentHeader{text-align:right;padding:5px 10px;background: rgb(237,237,237);}
+    .myDialogContentHeader i{cursor:pointer;}
+    .myDialogContentMain{height:90%;overflow:auto;}
+    #updateInfo textarea{height:16px;}

@@ -80,3 +80,43 @@ function noScroll() {
     document.documentElement.style.overflow = 'hidden';  // firefox, chrome
     document.body.scroll = "no"; // ie only
 }
+function maximFoto(foto){
+    noScroll();
+    var top = $(document).scrollTop();console.log(top);
+    var src = foto.attr('src');
+    var cap = foto.attr('title');
+    var preImg = new Image();
+    preImg.src = src;
+    var img = $("<img />");
+    img.attr("src",src);
+    var w = preImg.width;
+    var h = preImg.height;
+    var maxW = windowX -(windowX * 0.15);
+    var maxH = windowY -(windowY * 0.15);
+    if(w >= h){
+        ratio = maxW / w;
+        heightDef = h * ratio;
+        if (heightDef > maxH) {
+            ratio = maxH / heightDef;
+            widthDef = maxW * ratio;
+            $("#galleryWrap").css({"width":widthDef});
+            img.css({"width":widthDef, "height":maxH});
+        }else{
+            $("#galleryWrap").css({"width":maxW});
+            img.css({"width":maxW, "height":heightDef});
+        }
+    }else{
+        ratio = maxH / h; 
+        widthDef = w * ratio;
+        $("#galleryWrap").css({"width":widthDef});
+        img.css({"width":widthDef, "height":maxH});
+    } 
+    $("#fotoContent").html(img);
+    $("#caption").text(cap);
+    $("#galleryDiv").css({"top":top+"px"}).fadeIn('fast');
+    $("#galleryWrap header i").click(function(){
+       $("#galleryDiv").fadeOut('fast');
+       $("#fotoContent").html('');
+       scroll();
+    });
+}
