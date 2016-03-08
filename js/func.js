@@ -6,28 +6,15 @@ var windowY =  $( window ).height();
 
 $(document).ready(function() {
  $("#logo").css("height",headH + "px");
-
- $('#badge img').bind('mouseenter mouseleave', function() { 
-  $(this).attr({src: $(this).attr('data-hover') , 'data-hover': $(this).attr('src') });
- });
-
+ $(".myDialogContentHeader i").click(function(){$(".myDialog").fadeOut('fast', function(){scroll();});});
+ $('#badge img').bind('mouseenter mouseleave', function() {$(this).attr({src: $(this).attr('data-hover') , 'data-hover': $(this).attr('src') });});
  $('#toggleDiv').hide();
- $('#toggleButton').click(function(){
-  $('#toggleDiv').slideToggle('fast');
- });
-
+ $('#toggleButton').click(function(){ $('#toggleDiv').slideToggle('fast'); });
  $('.closeDialog').click(function(){$(this).closest('.ui-dialog-content').dialog('close');});
-
- $('.modLink').click(function(event){
-  event.preventDefault();
- });
- 
+ $('.modLink').click(function(event){ event.preventDefault(); });
  $("#enLang").click(function(){window.lang.change('en'); return false;});
  $("#itLang").click(function(){window.lang.change('it'); return false;});
- 
- 
- // la funzione toogle è deprecata dalla versione 1.9 di jquery
- // bisogna riscrivere il metodo creando la nuova funzione clickToggle
+
  (function ($) {
     $.fn.clickToggle = function (func1, func2) {
         var funcs = [func1, func2];
@@ -40,7 +27,7 @@ $(document).ready(function() {
         });
         return this;
     };
-}(jQuery));
+  }(jQuery));
 });
 //*****************************************************************************//
  function exportTableToCSV($table, filename) {
@@ -70,7 +57,7 @@ $(document).ready(function() {
     'target': '_blank'
   });
  }
- 
+
 function scroll() {
     document.documentElement.style.overflow = 'auto';  // firefox, chrome
     document.body.scroll = "yes"; // ie only
@@ -106,11 +93,11 @@ function maximFoto(foto){
             img.css({"width":maxW, "height":heightDef});
         }
     }else{
-        ratio = maxH / h; 
+        ratio = maxH / h;
         widthDef = w * ratio;
         $("#galleryWrap").css({"width":widthDef});
         img.css({"width":widthDef, "height":maxH});
-    } 
+    }
     $("#fotoContent").html(img);
     $("#caption").text(cap);
     $("#galleryDiv").css({"top":top+"px"}).fadeIn('fast');

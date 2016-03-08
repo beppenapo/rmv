@@ -1,4 +1,4 @@
-<?
+<?php
 require('db.php');
 $q = $_GET["term"];
 $query = ("select gid, nome from comuni where nome ilike '$q%' order by nome asc");

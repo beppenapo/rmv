@@ -81,7 +81,7 @@ $result=pg_query($connection, $query);
   </tr>
  </thead>
  <tbody>
-  <?php 
+  <?php
     while($row = pg_fetch_array($result)){
         $classe=($row['classe']==1)?'Amministratore':'Utente semplice';
         $stato=($row['attivo']==1)?'Attivo':'Non attivo';
@@ -111,9 +111,9 @@ $result=pg_query($connection, $query);
 <div id="nav">
 <aside>
  <section id="loginWrap">
- <?php 
+ <?php
   if(isset($_SESSION['id_user'])){include_once('inc/usrmenu.php'); }
-  else{include_once('inc/login_form.php');} 
+  else{include_once('inc/login_form.php');}
  ?>
  </section>
 
@@ -128,8 +128,8 @@ $result=pg_query($connection, $query);
 
 </div>
  <footer><?php require_once("inc/footer_test.php"); ?></footer>
- 
- 
+
+
 <div class="myDialog">
     <div class="myDialogWrapContent">
         <div class="myDialogContent">
@@ -137,7 +137,7 @@ $result=pg_query($connection, $query);
             <div class="myDialogContentMain"></div>
         </div>
     </div>
-</div> 
+</div>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/FooTable/js/footable.js"></script>
 <script type="text/javascript" src="js/FooTable/js/footable.sort.js"></script>
@@ -148,12 +148,13 @@ $result=pg_query($connection, $query);
 <script type="text/javascript" src="js/func.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+  
  $('.modUsr').click(function(){
    var idUsr = $(this).data('idusr');
    $.ajax({
     url: 'inc/usrUpdate.php',
-    type: 'POST', 
-    data: {idUsr : idUsr }, 
+    type: 'POST',
+    data: {idUsr : idUsr },
     success: function(data){
      $(".myDialog").fadeIn('fast', function(){
         noScroll();
@@ -164,8 +165,8 @@ $(document).ready(function() {
         $('#resetPwd').click(function(){
             $.ajax({
                 url: 'inc/resetPwd.php',
-                type: 'POST', 
-                data: {idusr : idusr, mail:mail }, 
+                type: 'POST',
+                data: {idusr : idusr, mail:mail },
                 success: function(data){$('#msg').text(data);},
                 error: function(richiesta,stato,errori){alert ('errore' + id)},
             }); //fine ajax
@@ -181,20 +182,20 @@ $(document).ready(function() {
             else{
                 $.ajax({
                     url: 'inc/usrUpdateScript.php',
-                    type: 'POST', 
-                    data: {idusr : idusr, nome:nome, cognome:cognome, classe:classe, attivo:attivo }, 
+                    type: 'POST',
+                    data: {idusr : idusr, nome:nome, cognome:cognome, classe:classe, attivo:attivo },
                     success: function(data){$('#msg').text(data).delay(2000).fadeOut(function(){ location.reload(); });},
                     error: function(richiesta,stato,errori){alert ('errore' + id)},
                 });
             }
         });
      });
-     $(".myDialogContentHeader i").click(function(){$(".myDialog").fadeOut('fast', function(){scroll();});});
+
     },
     error: function(richiesta,stato,errori){alert ('errore' + idUsr)},
    }); //fine ajax
  });
- 
+
     $('.delUsr').click(function(){
         var idUsr = $(this).data('idusr');
         $(".myDialog").fadeIn('fast', function(){
@@ -207,15 +208,15 @@ $(document).ready(function() {
             $("button[name=si]").click(function(){
                 $.ajax({
                     url: 'inc/usrDelScript.php',
-                    type: 'POST', 
-                    data: {idUsr : idUsr}, 
+                    type: 'POST',
+                    data: {idUsr : idUsr},
                     success: function(data){$(".myDialogContentMain").html(data).delay(2000).fadeOut(function(){ location.reload(); });},
                     error: function(richiesta,stato,errori){alert ('errore' + id)},
                 });
             });
         });
-    }); 
- 
+    });
+
 $('.footable').footable();
 $('.clear-filter').click(function (e) {
   e.preventDefault();
@@ -224,7 +225,7 @@ $('.clear-filter').click(function (e) {
  });
  $("#csv").click(function (event) {
    exportTableToCSV.apply(this, [$('.zebra'), 'utenti.csv']);
- }); 
+ });
 });
 </script>
 </body>
