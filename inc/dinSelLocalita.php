@@ -6,7 +6,7 @@ if($_POST['id']){
  $result = pg_query($connection, $query);
  $righe = pg_num_rows($result);
  if($righe > 0){
-  echo '<option value="15">-- seleziona località --</option>';
+  echo '<option value="15" selected disabled>-- seleziona località --</option>';
   while($row = pg_fetch_array($result)){
    $id_localita=$row['id_localita'];
    $localita=$row['localita'];

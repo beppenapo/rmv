@@ -14,7 +14,7 @@ $(document).ready(function() {
  $('.modLink').click(function(event){ event.preventDefault(); });
  $("#enLang").click(function(){window.lang.change('en'); return false;});
  $("#itLang").click(function(){window.lang.change('it'); return false;});
-
+ 
  (function ($) {
     $.fn.clickToggle = function (func1, func2) {
         var funcs = [func1, func2];

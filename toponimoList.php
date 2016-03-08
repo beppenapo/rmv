@@ -3,13 +3,14 @@ session_start();
 require_once("inc/db.php");
 
 $query=("
-SELECT localita.id_localita, localita.localita, comuni.gid as id_comune, comuni.nome as comune, count(sito.id) as siti
-FROM liste.localita
-LEFT JOIN comuni ON localita.id_comune = comuni.gid
-LEFT JOIN sito ON localita.id_localita = sito.id_localita
-WHERE localita.id_localita != 15
-GROUP BY localita.id_localita, localita.localita, comuni.id, comuni.nome
-ORDER BY localita ASC;
+select t.id_toponimo, t.id_comune, t.id_localita, t.toponimo, l.localita, c.nome as comune, count(sito.id) as siti
+from liste.toponimo t
+left join liste.localita l on t.id_localita = l.id_localita
+left join comuni c on t.id_comune = c.gid
+left join sito on sito.id_toponimo = t.id_toponimo
+where t.id_toponimo <> 12
+group by t.id_toponimo, t.id_comune, t.id_localita, t.toponimo, l.localita, c.nome
+order by comune asc, localita asc, toponimo asc;
 ");
 $result=pg_query($connection, $query);
 ?>
@@ -33,9 +34,9 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
 .formSubmit{margin:20px 0px !important; cursor:pointer;}
 .zebra tbody tr td a{display:block;padding:5px;margin:5px 0px;}
 .zebra tbody tr td a:nth-child(2){color:red !important;}
-.zebra thead tr th:nth-child(3) {width: 5%;}
-.zebra thead tr th:nth-child(4) {width: 3%;}
-.zebra thead tr th:nth-child(3), .zebra tbody tr td:nth-child(3),.zebra tbody tr td:nth-child(4) {text-align:center !important;}
+.zebra thead tr th:nth-child(4) {width: 5%;}
+.zebra thead tr th:nth-child(5) {width: 3%;}
+.zebra thead tr th:nth-child(4), .zebra tbody tr td:nth-child(4),.zebra tbody tr td:nth-child(5) {text-align:center !important;}
 .error{text-align:center !important; width:100% !important;margin:10px 0px;}
 </style>
 </head>
@@ -45,27 +46,27 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
    <div id="mainContent" class="wrapContent">
     <div id="mainContentWrap">
       <section id="toggleForm">
-        <header id="toggleButton">Inserisci una nuova località</header>
+        <header id="toggleButton">Inserisci un nuovo toponimo</header>
         <div id="toggleDiv" style="<?php echo $classToggle; ?>">
           <div id="newRec">
-            <form name="localitaForm" action="#">
+            <form name="toponimoForm" action="#">
               <label>Comune</label>
-              <input type="search" id="comune" class="comuneToken"  name="comune" data-campo="comuneGid" placeholder="Inizia a digitare il nome del Comune..." required oninvalid="this.setCustomValidity('Il campo non può essere vuoto')"
-              oninput="setCustomValidity('')"/>
+              <input type="search" id="comune" class="comuneToken"  name="comune" data-campo="comuneGid" placeholder="Inizia a digitare il nome del Comune..." required oninvalid="this.setCustomValidity('Il campo non può essere vuoto')" oninput="setCustomValidity('')"/>
               <input type="hidden" id="comuneGid" name="comuneGid" value=""/>
               <label>Località</label>
-              <input type="search" id="localita" name="localita" placeholder="Inserisci il nome della Località..." required oninvalid="this.setCustomValidity('Il campo non può essere vuoto')"
-              oninput="setCustomValidity('')"/>
-              <input type="submit" class="submit" name="addLoc" value="Aggiungi località">
+              <select name="localita" id="localita" disabled required></select>
+              <label>Toponimo</label>
+              <input type="text" name="toponimo" value='' placeholder="Inserisci almeno 4 caratteri" required disabled >
+              <input type="submit" class="submit" name="addTopo" value="Aggiungi toponimo" disabled>
               <div id="msg"></div>
             </form>
           </div>
         </div>
       </section>
       <section id="tabella">
-        <header><span lang="it">Lista completa delle località presenti nel database</span></header>
+        <header><span lang="it">Lista completa dei toponimi presenti nel database</span></header>
         <div id="filtri">
-          <input type="search" placeholder="cerca localita" id="filtro">
+          <input type="search" placeholder="cerca toponimo" id="filtro">
           <i class="fa fa-undo clear-filter" title="Pulisci filtro"></i>
           <a href="#" class="export" id="csv" title="esporta dati tabella in formato csv">CSV</a>
         </div>
@@ -74,6 +75,7 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
             <tr class='csv'>
               <th>Comune</th>
               <th>Località</th>
+              <th>Toponimo</th>
               <th>Siti</th>
               <th data-sort-ignore="true"></th>
             </tr>
@@ -84,10 +86,11 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
                echo "<tr class='csv'>";
                echo "<td>".$row['comune']."</td>";
                echo "<td>".$row['localita']."</td>";
+               echo "<td>".$row['toponimo']."</td>";
                echo "<td>".$row['siti']."</td>";
                echo "<td>";
-               if($_SESSION['classe'] == 1){echo "<a href='#' data-idloc='".$row['id_localita']."' class='modLoc' title='modifica localita'><i class='fa fa-wrench'></i></a>";}
-               if($_SESSION['classe'] == 1){echo "<a href='#' data-idloc='".$row['id_localita']."' class='delLoc' title='elimina localita'><i class='fa fa-times'></i></a>";}
+               if($_SESSION['classe'] == 1){echo "<a href='#' data-idtopo='".$row['id_toponimo']."' class='modTopo' title='modifica toponimo'><i class='fa fa-wrench'></i></a>";}
+               if($_SESSION['classe'] == 1){echo "<a href='#' data-idtopo='".$row['id_toponimo']."' class='delTopo' title='elimina toponimo'><i class='fa fa-times'></i></a>";}
                echo "</td>";
                echo "</tr>";
           }
@@ -130,20 +133,20 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
          <div class="myDialogContent">
              <div class="myDialogContentHeader"><i class="fa fa-times"></i></div>
              <div class="myDialogContentMain">
-               <div class="hidden" id="locUpdateForm">
-                 <h2>Modifica la seguente località presente nel comune di <span class="comuneUp"></span></h2>
-                 <input type="search" name="locUp" placeholder="Inserisci il nome della Località..." >
-                 <input type="hidden" name="locIdUp">
-                 <input type="submit" class="submit" name="upLoc" value="Modifica località">
+               <div class="hidden" id="topoUpdateForm">
+                 <h2>Modifica il seguente toponimo presente nel comune di <span class="comuneUp"></span>, in località <span class="locUp"></span></h2>
+                 <input type="search" name="topoUp" placeholder="Inserisci il nome del toponimo..." >
+                 <input type="hidden" name="topoIdUp">
+                 <input type="submit" class="submit" name="upTopo" value="Modifica toponimo">
                  <div id="msgUp"></div>
                </form>
              </div>
-             <div class="hidden" id="locDelForm">
-               <p class="error">Stai per eliminare la seguente Località</p>
-               <p id="locDel"></p>
-               <p class="error">Se confermi, la località verrà definitivamente eliminata</p>
-               <input type="hidden" name="locIdDel">
-               <input type="submit" class="submit" name="delLocSubmit" value="Conferma eliminazione">
+             <div class="hidden" id="topoDelForm">
+               <p class="error">Stai per eliminare il seguente toponimo</p>
+               <p id="topoDel"></p>
+               <p class="error">Se confermi, il toponimo verrà definitivamente eliminato</p>
+               <input type="hidden" name="topoIdDel">
+               <input type="submit" class="submit" name="delTopoSubmit" value="Conferma eliminazione">
                <div id="msgDel"></div>
              </div>
            </div>
@@ -169,18 +172,18 @@ $(document).ready(function() {
     $("#filtri span").text('');
     $('.footable').trigger('footable_clear_filter');
    });
-   $("#csv").click(function (event) { exportTableToCSV.apply(this, [$('.zebra'), 'localita.csv']); });
+   $("#csv").click(function (event) { exportTableToCSV.apply(this, [$('.zebra'), 'toponimi.csv']); });
 
-   $("form[name=localitaForm]").on("submit", function(e){
+   $("form[name=toponimoForm]").on("submit", function(e){
      e.preventDefault();
      var data = $(this).serialize();
      $.ajax({
-       url:"inc/localita_insert.php",
+       url:"inc/toponimo_insert.php",
        type:"POST",
        data:data,
        success: function(data){
          if(data=='ok'){
-           $("#msg").text("ok, località inserita").delay(3000).fadeOut('fast', function(){location.reload();} );
+           $("#msg").text("ok, toponimo inserito").delay(3000).fadeOut('fast', function(){location.reload();} );
          }else{
            $("#msg").text("Attenzione, salvataggio fallito: "+data);
          }
@@ -196,35 +199,54 @@ $(document).ready(function() {
         $(this).val(ui.item.value);
         var c = $(this).data("campo");
         $("#"+c).val(ui.item.id);
+        $.ajax({
+         type: "POST",
+         url: "inc/dinSelLocalita.php",
+         data: {id:ui.item.id},
+         cache: false,
+         success: function(html){
+           $("select[name=localita]")
+            .removeAttr('disabled')
+            .html(html)
+            .on("change", function(){
+                $("input[name=toponimo]").removeAttr('disabled').on("keyup", function(){
+                  var i = $(this).val().length;
+                  i > 3 ? $("input[name=addTopo]").removeAttr('disabled') : $("input[name=addTopo]").attr('disabled', true);
+                });
+            });
+          }
+        });//ajax
       }
     });
 
-  $(".modLoc").click(function(){
-    var idloc = $(this).data('idloc');
+  $(".modTopo").click(function(){
+    var idTopo = $(this).data('idtopo');
     var com = $(this).parent('td').siblings().eq(0).text();
     var loc = $(this).parent('td').siblings().eq(1).text();
+    var topo = $(this).parent('td').siblings().eq(2).text();
     $(".myDialog").fadeIn('fast', function(){
       noScroll();
       $(".myDialogContent").css("height","auto");
       $(".comuneUp").text(com);
-      $("input[name=locUp]").val(loc);
-      $("input[name=locIdUp]").val(idloc);
-      $("#locUpdateForm").show();
-      $("input[name=upLoc]").on("click", function(e){
+      $(".locUp").text(loc);
+      $("input[name=topoUp]").val(topo);
+      $("input[name=topoIdUp]").val(idTopo);
+      $("#topoUpdateForm").show();
+      $("input[name=upTopo]").on("click", function(e){
         e.preventDefault();
-        var id = $("input[name=locIdUp]").val();
-        var loc = $("input[name=locUp]").val();
-        if(!loc){
+        var id = $("input[name=topoIdUp]").val();
+        var topo = $("input[name=topoUp]").val();
+        if(!topo){
           $("#msgUp").text("Attenzione, il campo non può essere vuoto.");
-          $("input[name=locUp]").addClass("errorClass");
+          $("input[name=topoUp]").addClass("errorClass");
         }else{
           $("#msgUp").text("");
-          $("input[name=locUp]").removeClass("errorClass");
-          $.post("inc/localita_update.php"
-            , {id:id, loc:loc}
+          $("input[name=topoUp]").removeClass("errorClass");
+          $.post("inc/toponimo_update.php"
+            , {id:id, topo:topo}
             , function(data){
                 if(data=='ok'){
-                  $("#msgUp").text("ok, località aggiornata").delay(3000).fadeOut('fast', function(){location.reload();} );
+                  $("#msgUp").text("ok, toponimo aggiornato").delay(3000).fadeOut('fast', function(){location.reload();} );
                 }else{
                   $("#msgUp").text("Attenzione, salvataggio fallito: "+data);
                 }
@@ -234,20 +256,20 @@ $(document).ready(function() {
       });
     });
   });
-  $(".delLoc").click(function(){
-    var idloc = $(this).data('idloc');
-    var loc = $(this).parent('td').siblings().eq(1).text();
+  $(".delTopo").click(function(){
+    var idTopo = $(this).data('idtopo');
+    var topo = $(this).parent('td').siblings().eq(2).text();
     $(".myDialog").fadeIn('fast', function(){
       noScroll();
       $(".myDialogContent").css("height","auto");
-      $("p#locDel").text(loc).css({"text-align":"center", "font-size":"1.2rem","font-weight":"bold"});
-      $("#locDelForm").show();
-      $("input[name=delLocSubmit]").click(function(){
-        $.post("inc/localita_delete.php"
-          , {id:idloc}
+      $("p#topoDel").text(topo).css({"text-align":"center", "font-size":"1.2rem","font-weight":"bold"});
+      $("#topoDelForm").show();
+      $("input[name=delTopoSubmit]").click(function(){
+        $.post("inc/toponimo_delete.php"
+          , {id:idTopo}
           , function(data){
               if(data=='ok'){
-                $("#msgDel").text("ok, località definitivamente eliminata").delay(3000).fadeOut('fast', function(){location.reload();} );
+                $("#msgDel").text("ok, toponimo definitivamente eliminato").delay(3000).fadeOut('fast', function(){location.reload();} );
               }else{
                 $("#msgDel").text("Attenzione, eliminazione fallita: "+data);
               }

@@ -17,7 +17,7 @@
 <nav class="navLink">
  <ul>
   <li><a href="newpoi.php">Nuovo punto interesse</a></li>
-  <?php if($pageURL=='poi.php'){echo '<li><a href="#" id="delPoiLink">Elimina punto di interesse</a></li>';} ?>
+  <?php if($pageURL=='poi.php'){ echo '<li><a href="#" data-id="'.$id.'" id="delPoiLink">Elimina punto di interesse</a></li>';} ?>
  </ul>
 </nav>
 </div>
@@ -26,7 +26,7 @@
 <nav class="navLink">
  <ul>
   <li><a href="localitaList.php">località</a></li>
-  <li><a href="#">toponimi</a></li>
+  <li><a href="toponimoList.php">toponimi</a></li>
   <li><a href="#">microtoponimi</a></li>
  </ul>
 </nav>

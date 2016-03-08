@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once("inc/db.php");
 ?>
@@ -22,7 +22,7 @@ require_once("inc/db.php");
 
 </head>
 <body onload="init()">
-<header id="head"><?php require_once('inc/head.php')?></header>
+<header id="head"><?php require_once('inc/head.php'); ?></header>
 <div id="map">
  <div id="wrapPanel">
   <div id="panelContent" class="htoolbar">
@@ -30,15 +30,15 @@ require_once("inc/db.php");
    <span id="msg">Muovi il mouse all'interno della mappa tenendo premuto il tasto sinistro</span>
   </div>
   <div id="cercapoi" class="htoolbar">
-   <input class="autocompletamento" id="cercapoilist" placeholder="cerca un punto di interesse" type="search"/> 
+   <input class="autocompletamento" id="cercapoilist" placeholder="cerca un punto di interesse" type="search"/>
   </div>
   <div id="nominatim" class="htoolbar">
-   <input id="term" placeholder="cerca indirizzo" type="search"/> 
+   <input id="term" placeholder="cerca indirizzo" type="search"/>
    <i class="fa fa-search" id="search"></i>
    <div id="resultSearch"><ul id="resultSearchList"></ul><span id='hideSearch'>nascondi lista</span></div>
   </div>
  </div>
- 
+
  <div id="menuMap">
   <h1 id="menuMapIco" class="cursor"><i class="fa fa-bars"></i></h1>
   <div id="switcher">
@@ -72,7 +72,7 @@ require_once("inc/db.php");
     <tr>
      <td><label>comune</label></td>
      <td>
-       <input class="autocompletamento obbligatorio" id="comuneList" placeholder="campo obbligatorio - Inizia a digitare il nome di un Comune" data-campo="comune" type="text"/>   
+       <input class="autocompletamento obbligatorio" id="comuneList" placeholder="campo obbligatorio - Inizia a digitare il nome di un Comune" data-campo="comune" type="text"/>
        <input type="hidden" value="1" id="comune" />
      </td>
     </tr>
@@ -102,7 +102,7 @@ require_once("inc/db.php");
         $ex1 = pg_query($connection, $q1);
         $row1 = pg_num_rows($ex1);
         for ($x = 0; $x < $row1; $x++){
-           $id_tipo = pg_result($ex1, $x,"id_sito_tipo"); 	
+           $id_tipo = pg_result($ex1, $x,"id_sito_tipo");
            $tipo = pg_result($ex1, $x,"tipo");
            echo "<option value='$id_tipo'>$tipo</option>";
          }
@@ -124,7 +124,7 @@ require_once("inc/db.php");
         $ex2 = pg_query($connection, $q2);
         $row2 = pg_num_rows($ex2);
         for ($x = 0; $x < $row2; $x++){
-           $id_periodo = pg_result($ex2, $x,"id_periodo_cultura"); 	
+           $id_periodo = pg_result($ex2, $x,"id_periodo_cultura");
            $periodo = pg_result($ex2, $x,"periodo_cultura");
            echo "<option value='$id_periodo'>$periodo</option>";
          }
@@ -154,7 +154,7 @@ require_once("inc/db.php");
         $ex3 = pg_query($connection, $q3);
         $row3 = pg_num_rows($ex3);
         for ($x = 0; $x < $row3; $x++){
-           $id_accessibilita = pg_result($ex3, $x,"id_accessibilita"); 	
+           $id_accessibilita = pg_result($ex3, $x,"id_accessibilita");
            $accessibilita = pg_result($ex3, $x,"accessibilita");
            echo "<option value='$id_accessibilita'>$accessibilita</option>";
          }
@@ -172,7 +172,7 @@ require_once("inc/db.php");
         $ex4 = pg_query($connection, $q4);
         $row4 = pg_num_rows($ex4);
         for ($x = 0; $x < $row4; $x++){
-           $id_def_generale = pg_result($ex4, $x,"id_def_generale"); 	
+           $id_def_generale = pg_result($ex4, $x,"id_def_generale");
            $def_gen = pg_result($ex4, $x,"def_generale");
            $ico = pg_result($ex4, $x,"ico");
            echo "<option value='$id_def_generale' data-ico='$ico'>$def_gen</option>";
@@ -196,7 +196,7 @@ require_once("inc/db.php");
         $ex5 = pg_query($connection, $q5);
         $row5 = pg_num_rows($ex5);
         for ($x = 0; $x < $row5; $x++){
-           $id_conservazione = pg_result($ex5, $x,"id_stato_conservazione"); 	
+           $id_conservazione = pg_result($ex5, $x,"id_stato_conservazione");
            $conservazione = pg_result($ex5, $x,"stato_conservazione");
            echo "<option value='$id_conservazione'>$conservazione</option>";
          }
@@ -209,12 +209,12 @@ require_once("inc/db.php");
      <td>
       <select name="materiale" id="materiale">
        <option value="11"></option>
-       <?php 
+       <?php
         $q6=("SELECT * FROM liste.materiale order by materiale asc;");
         $ex6 = pg_query($connection, $q6);
         $row6 = pg_num_rows($ex6);
         for ($x = 0; $x < $row6; $x++){
-           $id_materiale = pg_result($ex6, $x,"id_materiale"); 	
+           $id_materiale = pg_result($ex6, $x,"id_materiale");
            $materiale = pg_result($ex6, $x,"materiale");
            echo "<option value='$id_materiale'>$materiale</option>";
          }
@@ -255,18 +255,18 @@ require_once("inc/db.php");
 <script type="text/javascript" src="js/openlayers/lib/OpenLayers.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyAjIFKh5283gkT3TEdbrjxzm1-sFQppG1Y" type="text/javascript"></script>
 <script type="text/javascript" src="js/func.js"></script>
-<script type="text/javascript" src="js/dinSelect.js"></script> 
+<script type="text/javascript" src="js/dinSelect.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
  $("#newPoi,#resultSearch").hide();
  $('#annullaInserimento').click(function(){location.reload();});
 
- $('#salvaDati').click(onTriggerInsertar);  
- 
+ $('#salvaDati').click(onTriggerInsertar);
+
  $("#search").click(function(){
   var q = $("#term").val();
   geocode(q);
- }); 
+ });
 });
 
 
@@ -308,28 +308,28 @@ var map, extent, gsat, osm, arrayOSM, arrayAerial, baseOSM, baseAerial, poi, hig
 var info, geolocate, filter, layers,selectFeatureControl, stile;//controlli
 
 $(document).ready(function() {
- 
- if(windowX < 481){ //smartphone         
+
+ if(windowX < 481){ //smartphone
   switcherWidth = "150px";
   resultWidth = "99%";
   $(".switcherIco").remove();
  }
  else if(windowX < 1024){ //tablet
   switcherWidth = "180px";
-  resultWidth = "250px"; 
+  resultWidth = "250px";
  }
  else { //pc
   switcherWidth = "200px";
   resultWidth = "350px";
  }
- 
+
  $("#result").css("width", resultWidth);
 
- $("#mappaLink").addClass('active').click(function(e){e.preventDefault();}); 
+ $("#mappaLink").addClass('active').click(function(e){e.preventDefault();});
 
  $("#map").height(windowY-headH-5);
  $("#menuMap").css("width", "22px");
- 
+
  $("#switcher, #result").hide();
  $("#menuMapIco").clickToggle(
   function(){
@@ -344,7 +344,7 @@ $(document).ready(function() {
 
  $(".baselayers").on('change', function(){
   $(".baselayers").closest('label').removeClass('layerActive');
-  $(this).closest('label').addClass('layerActive'); 
+  $(this).closest('label').addClass('layerActive');
  });
 });
 function init() {
@@ -353,7 +353,7 @@ function init() {
  var msgDel = "Geometria eliminata!\n Per rendere effettiva l'eliminazione\n utilizza il tasto 'Salva' a destra nel menù delle funzioni";
  var msgIns = "Ok! Salvataggio avvenuto correttamente";
  var msgUpdate = "Ok! La geometria è stata modificata";
- 
+
  var DeleteFeature = OpenLayers.Class(OpenLayers.Control, {
    initialize: function(layer, options) {
      OpenLayers.Control.prototype.initialize.apply(this, [options]);
@@ -380,7 +380,7 @@ function init() {
     },
     CLASS_NAME: "OpenLayers.Control.DeleteFeature"
 });
- 
+
  map = new OpenLayers.Map ("map", {
    controls:[
     new OpenLayers.Control.Navigation(),
@@ -395,12 +395,12 @@ function init() {
    displayProjection: new OpenLayers.Projection("EPSG:4326")
  });
 
- 
+
 arrayOSM = ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"];
-            
+
 baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, {
                 transitionEffect: "resize"
             });
@@ -503,7 +503,7 @@ map.addLayer(punti);
         displayClass: "olControlModifyFeature"
         //,vertexRenderIntent: "vertex"
  });
- 
+
 var divPannello = document.getElementById("panel");
  panel = new OpenLayers.Control.Panel({
        defaultControl: navigate,
@@ -511,7 +511,7 @@ var divPannello = document.getElementById("panel");
        div: divPannello
  });
  panel.addControls([navigate,draw,edit,del,save]);
-    
+
  map.addControl(panel);
 
 
@@ -526,8 +526,8 @@ var divPannello = document.getElementById("panel");
 
 
 if (!map.getCenter()) {map.zoomToExtent(extent);}
- 
-$('.olControlZoom').append('<a href="#" id="max" title="torna allo zoom iniziale"><i class="fa fa-globe"></i></a>'); 
+
+$('.olControlZoom').append('<a href="#" id="max" title="torna allo zoom iniziale"><i class="fa fa-globe"></i></a>');
 $('.olControlZoomIn').attr("title","Ingrandisci la mappa");
 $('.olControlZoomOut').attr("title","Diminuisci la mappa");
 $("#max").click(function(){map.zoomToExtent(extent);});
@@ -540,43 +540,43 @@ function onFeatureInsert(feature){
    var gid = selectedFeature.attributes['gid'];
    $('#fid').val(fid);
    $('#newPoi').show();
-} 
- 
+}
+
   // Passa attributi al form
  var btnInsert = new OpenLayers.Control.Button({trigger: onTriggerInsertar});
 
 function onTriggerInsertar(fid){
  var errori = "Prima di proseguire correggi i seguenti errori:<br/>";
- var sito = $('#nome').val();  
+ var sito = $('#nome').val();
  if(!sito){errori += 'Inserisci un nome per il sito<br/>'; $('#nome').addClass('errorClass');}
- else{$('#nome').removeClass('errorClass');};  
- 
- var comune = $('#comuneList').val(); 
+ else{$('#nome').removeClass('errorClass');};
+
+ var comune = $('#comuneList').val();
  if(!comune){errori += 'Seleziona un Comune dalla lista<br/>'; $('#comuneList').addClass('errorClass');}
- else{$('#comuneList').removeClass('errorClass');};  
+ else{$('#comuneList').removeClass('errorClass');};
 
- var tipoSito= $('#tipoSito').val(); 
+ var tipoSito= $('#tipoSito').val();
  if(!tipoSito){errori += 'Seleziona una tipologia per il sito<br/>'; $('#tipoSito').addClass('errorClass');}
- else{$('#tipoSito').removeClass('errorClass');};  
+ else{$('#tipoSito').removeClass('errorClass');};
 
- var descrizione = $('#descrizione').val(); 
+ var descrizione = $('#descrizione').val();
  if(!descrizione){errori += 'Inserisci una descrizione anche breve<br/>'; $('#descrizione').addClass('errorClass');}
- else{$('#descrizione').removeClass('errorClass');};  
+ else{$('#descrizione').removeClass('errorClass');};
 
- var periodo = $('#periodo').val(); 
+ var periodo = $('#periodo').val();
  if(!periodo){errori += 'Seleziona un periodo<br/>'; $('#periodo').addClass('errorClass');}
- else{$('#periodo').removeClass('errorClass');};  
+ else{$('#periodo').removeClass('errorClass');};
 
- var accessibilita = $('#accessibilita').val(); 
+ var accessibilita = $('#accessibilita').val();
  if(!accessibilita){errori += 'Seleziona il tipo di accesso al sito<br/>'; $('#accessibilita').addClass('errorClass');}
- else{$('#accessibilita').removeClass('errorClass');};  
+ else{$('#accessibilita').removeClass('errorClass');};
 
- var defGen = $('#def_gen').val(); 
+ var defGen = $('#def_gen').val();
  if(!defGen){errori += 'Seleziona una definizione generale che identifichi il sito<br/>'; $('#def_gen').addClass('errorClass');}
- else{$('#def_gen').removeClass('errorClass');};  
+ else{$('#def_gen').removeClass('errorClass');};
 
  var statoCons = $('#conservazione').val(); if(!statoCons){errori += 'Definisci lo stato di conservazione<br/>'};
- 
+
  var link = $("#link").val();
  if(link){
     var urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
