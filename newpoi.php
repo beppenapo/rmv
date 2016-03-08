@@ -252,8 +252,8 @@ require_once("inc/db.php");
 <script type="text/javascript" src="js/jq-ui/js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="js/lang/js/jquery-cookie.js" charset="utf-8" type="text/javascript"></script>
 <script src="js/lang/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
-<script type="text/javascript" src="js/ol2.13/OpenLayers.js"></script> 
-<script src="http://maps.google.com/maps/api/js?v=3.2&amp;sensor=false"></script>
+<script type="text/javascript" src="js/openlayers/lib/OpenLayers.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyAjIFKh5283gkT3TEdbrjxzm1-sFQppG1Y" type="text/javascript"></script>
 <script type="text/javascript" src="js/func.js"></script>
 <script type="text/javascript" src="js/dinSelect.js"></script> 
 <script type="text/javascript">
@@ -388,8 +388,8 @@ function init() {
     new OpenLayers.Control.Zoom(),
     new OpenLayers.Control.TouchNavigation({dragPanOptions: {enableKinetic: true}})
    ],
-   maxResolution: 'auto',
-   maxExtent: new OpenLayers.Bounds (1160225,5397418, 1244871,5441706),
+   maxResolution: [156543.03390625, 78271.516953125, 39135.7584765625, 19567.87923828125, 9783.939619140625, 4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033, 9.554628534317017, 4.777314267158508, 2.388657133579254, 1.194328566789627, 0.5971642833948135, 0.29858214169740677, 0.14929107084870338, 0.07464553542435169, 0.037322767712175846, 0.018661383856087923, 0.009330691928043961, 0.004665345964021981, 0.0023326729820109904, 0.0011663364910054952, 5.831682455027476E-4, 2.915841227513738E-4, 1.457920613756869E-4],
+   maxExtent: new OpenLayers.Bounds (-20037508.34,-20037508.34,20037508.34,20037508.34),
    units: 'm',
    projection: new OpenLayers.Projection("EPSG:3857"),
    displayProjection: new OpenLayers.Projection("EPSG:4326")
@@ -407,6 +407,7 @@ baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, {
 map.addLayer(baseOSM);
 
 gsat = new OpenLayers.Layer.Google("Hybrid", {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22});
+//gsat = new OpenLayers.Layer.WMS("real", "http://213.215.135.196/reflector/open/service?", {layers: 'rv1', format: 'image/jpeg', attribution: "RealVista1.0 WMS OPEN di e-GEOS SpA - CC BY SA"});
 map.addLayer(gsat);
 
 
@@ -485,7 +486,7 @@ map.addLayer(punti);
  save = new OpenLayers.Control.Button({
          title: "Salva le modifiche effettuate e chiudi la sessione di lavoro",
          trigger: function() {
-           if(edit.feature) {edit.selectControl.unselectAll(); $('#msg').text(msgUpdate);}else{$('#msg').text(msgIns);}
+           if(edit.feature) {$('#msg').text(msgUpdate);}else{$('#msg').text(msgIns);}
            saveStrategy.save();
          },
          displayClass: "olControlSaveFeatures"
@@ -577,11 +578,13 @@ function onTriggerInsertar(fid){
  var statoCons = $('#conservazione').val(); if(!statoCons){errori += 'Definisci lo stato di conservazione<br/>'};
  
  var link = $("#link").val();
- var urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
- if (urlregex.test(link)) {
-  $('#link').removeClass('errorClass');
- }else{
-  errori += 'Inserisci un link valido<br/>'; $('#link').addClass('errorClass');
+ if(link){
+    var urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
+    if (urlregex.test(link)) {
+        $('#link').removeClass('errorClass');
+    }else{
+        errori += 'Inserisci un link valido<br/>'; $('#link').addClass('errorClass');
+    }
  }
 
   if(!sito || !comune || !tipoSito || !descrizione || !periodo || !accessibilita || !defGen || !statoCons){

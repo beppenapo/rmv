@@ -1,11 +1,12 @@
 <?php
 session_start();
 require("inc/db.php");
+require 'inc/mail/PHPMailerAutoload.php';
 $nome=pg_escape_string($_POST['nome']);
 $cognome=pg_escape_string($_POST['cognome']);
 $email=pg_escape_string($_POST['email']);
 $classe=$_POST['classe'];
-
+$name = $nome.' '.$cognome;
 $pwd = "";
 $pwdRand = array_merge(range('A','Z'), range('a','z'), range(0,9));
 for($i=0; $i < 10; $i++) {$pwd .= $pwdRand[array_rand($pwdRand)];}
@@ -16,43 +17,35 @@ if (defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
   $password = crypt($pwd, $salt);
 }
 
-$new="insert into usr(nome, cognome, email,pwd, classe,attivo, salt) values('$nome','$cognome','$email','$password',$classe,1, '$salt') ";
-$exec = pg_query($connection, $new);
-if(!$exec){die("Errore nella query: \n" . pg_last_error($connection));}
-else{
-$to      = $email;
-$subject = 'Nuovo account su Montopoli';
-$message = '
-<html>
-<head>
- <title>Nuovo account sul sito di Montopoli</title>
-</head>
-<body>
- <h2>Ciao '.$nome.'</h2>
- <p>Un nuovo account a tuo nome &egrave; stato registrato sul sito di Montopoli!</p>
- <p>Le tue credenziali di accesso sono:<br/>username: <b>'.$email.'</b><br/>password: <b>'.$pwd.'</b></p>
- <p>La password pu&ograve; essere modificata in qualunque momento.</p>
- <p>Vai alla pagina di login per modificare il tuo profilo: <a href="http://37.187.200.160/">http://37.187.200.160/</a></p>
-</body>
-</html>
-';
-$message = wordwrap($message, 70, "\n");
-
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-type: text/html; charset=utf8\r\n";
-$headers .= "From: beppenapo@arc-team.com\r\n";
-$headers .= "Organization: Sistema Museale Valdarno di Sotto\r\n";
-$headers .= "Reply-To: beppenapo@arc-team.com\r\n";
-$headers .= "Return-Path: beppenapo@arc-team.com\r\n";
-$headers .= "Content-Transfer-Encoding: binary";
-$headers .= "X-Priority: 3\r\n";
-$headers .= "X-Mailer: PHP". phpversion() ."\r\n";
-
-if(mail($to, $subject, $message, $headers, '-f beppenapo@arc-team.com')){
- $mailMsg = "Una mail è stata inviata all'indirizzo mail indicato nel form.<br/>Se la mail non è presente nella casella di posta utilizzata, è probabile che sia stata spostata nella casella di spam.";
+$a = "insert into usr(nome, cognome, email,pwd, classe,attivo, salt) values('$nome','$cognome','$email','$password',$classe,1, '$salt'); ";
+$b = pg_query($connection, $a);
+if($b){
+    $mail = new PHPMailer;
+    $body = file_get_contents('/var/www/mail.html');
+    $body = str_replace('%username%', $email, $body);
+    $body = str_replace('%password%', $pwd, $body);
+    $body = str_replace('%utente%', $name, $body);
+    $mail->Host = "smtp.arc-team.com";
+    $mail->Mailer = "smtp";
+    $mail->Port = 25;
+    $mail->SMTPSecure = 'tsl';
+    $mail->SMTPAuth = true;
+    $mail->Username   = "info@arc-team.com";
+    $mail->Password   = "Arc-T3amV3";
+    $mail->setFrom('info@arc-team.com', 'Arc-Team');
+    $mail->addReplyTo('info@arc-team.com', 'Arc-Team');
+    $mail->AddAddress($email, $name);
+    $mail->Subject = 'Nuovo account sul sito Valdarno Musei';
+    $mail->isHTML(true); 
+    $mail->msgHTML($body, dirname(__FILE__));
+    $mail->AltBody = 'Ciao '.$nome.' '.$cognome.'\nUn nuovo account è stato creato a tuo nome sul sito di Valdarno Musei\nLe tue credenziali per accedere al sistema sono le seguenti:\nutente '.$email.'\npassword '.$pwd.'\nVai su http://37.187.200.160/index.php per efettuare il login e inizia re le tue sessioni di lavoro.\nUn saluto dal gruppo di lavoro.';
+    //$mail->SMTPDebug  = 1;
+    if($mail->Send()) {$msg = "Una mail &egrave; stata inviata all&#39;indirizzo mail indicato nel form.<br/>Se la mail non &egrave; presente nella casella di posta utilizzata, &egrave; probabile che sia stata spostata nella casella di spam.";} else { $msg =  "Errore nell'invio della mail': " . $mail->ErrorInfo;}
 }else{
- $mailMsg = "Si è verificato un errore nell'invio della mail";
+    $msg = "Errore nella creazione dell&#39;utente, riprova.<br/>Se l&#39;errore persiste contatta il responsabile web al seguente indirizzo di posta elettronica: beppenapo@gmail.com";
 }
+
+   
 
 ?>
 <!DOCTYPE html>
@@ -76,10 +69,9 @@ if(mail($to, $subject, $message, $headers, '-f beppenapo@arc-team.com')){
 </head>
 <body>
  <div id="divMsg">
-  <h1>Il nuovo utente è stato creato<br/><?php echo $mailMsg; ?></h1>
+  <h1><?php echo $msg; ?></h1>
   <a href="utenti.php" title="torna alla pagina degli utenti.">torna alla pagina utenti</a>
  </div>
 </body>
 </html>
-<?php } ?>
 

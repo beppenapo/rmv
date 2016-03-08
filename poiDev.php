@@ -520,20 +520,39 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
 <script type="text/javascript">
 var idPoi = <?php echo $id; ?>;
 $(document).ready(function() {
+
+$.fn.resize=function(a){
+    var d=Math.ceil;
+    if(a==null)a=200;
+    var e=a, f=a;
+    $(this).each(function(){
+        var b=$(this).height(),c=$(this).width();
+        if(b>c)f=d(c/b*a);
+        else e=d(b/c*a);
+        $(this).css({height:e,width:f});
+    })
+};
+var thumbWidth = $(".wrapThumb").width();
+$('.wrapThumb img').resize(thumbWidth);
+
+
     $("a.button, a.photoButton").click(function(e){e.preventDefault();})
-    $(".myDialogContentHeader i").click(function(){$(".myDialog").fadeOut('fast');});
+    $(".myDialogContentHeader i").click(function(){$(".myDialog").fadeOut('fast'); scroll();});
     var ratio = 0;
     var widthDef;
     var heightDef;
     $('.thumb').css({width:'100%'});
     $(".viewThumb").click(function(){var foto = $(this).parent().next('img'); maximFoto(foto); });
-    $('.thumb').click(function(){ var foto = $(this); maximFoto(foto); });
+    $('.thumb')
+        //.mouseenter(function(){$(this).prev('.photoTool').fadeIn(500);})
+        //.mouseleave(function(){$(this).prev('.photoTool').fadeOut(500);})
+        .click(function(){ var foto = $(this); maximFoto(foto); });
     
     $('.delPhoto').on("click", function(){
         var foto = $(this).data('id');
         var path = $(this).data('path');
         $("#delFoto input[name=foto]").val(foto);
-        $('#delFoto').fadeIn('fast');
+        $('#delFoto').fadeIn('fast', function(){noScroll();});
         $("button[name=delFotoButt]").click(function(){
             $.ajax({
                 url: 'inc/delFoto.php',
@@ -553,7 +572,7 @@ $(document).ready(function() {
         var didascalia = $(this).data('dida');
         $("#upDidascalia input[name=foto]").val(foto);
         $("#upDidascalia textarea[name=didascalia]").val(didascalia);
-        $('#upDidascalia').fadeIn('fast');
+        $('#upDidascalia').fadeIn('fast', function(){noScroll();});
         $("button[name=didascaliaButt]").click(function(){
             var didascalia = $("#upDidascalia textarea[name=didascalia]").val();
             $.ajax({
@@ -571,7 +590,7 @@ $(document).ready(function() {
  
  
     $("#modDescr").click(function(){
-        $('#updateDescriz').fadeIn('fast');
+        $('#updateDescriz').fadeIn('fast', function(){noScroll();});
         $("button[name=upDescriz]").click(function(){
             var newDescr = $("textarea[name=newDescr]").val();
             if(!newDescr){$("#msgDescr").text('Devi inserire una descrizione'); return false;}
@@ -583,13 +602,13 @@ $(document).ready(function() {
                     var txt = newDescr.replace(/\n/g,"<br>");
                     $("#DescrizioneContent").html(txt);
                     $("#msgDescr").text(data);
-                    $("#updateDescriz").delay(3000).fadeOut('fast', function(){$("#msgDescr").text('');});
+                    $("#updateDescriz").delay(3000).fadeOut('fast', function(){$("#msgDescr").text('');scroll();});
                 }
             }); //fine ajax
         });
     });
     $('#modInfo').click(function(){ 
-        $('#updateInfo').fadeIn('fast'); 
+        $('#updateInfo').fadeIn('fast', function(){noScroll();}); 
         $("button[name=upInfo]").click(function(){
             var inv = $("textarea[name=inv]").val();
             var nome = $("textarea[name=nome]").val();

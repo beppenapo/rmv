@@ -92,8 +92,10 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script src="js/lang/js/jquery-cookie.js" charset="utf-8" type="text/javascript"></script>
 <script src="js/lang/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
-<script type="text/javascript" src="js/ol2.13/OpenLayers.js"></script> 
-<script src="http://maps.google.com/maps/api/js?v=3.2&amp;sensor=false"></script>
+<!--<script type="text/javascript" src="js/ol2.13/OpenLayers.js"></script> -->
+<script type="text/javascript" src="js/openlayers/lib/OpenLayers.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyAjIFKh5283gkT3TEdbrjxzm1-sFQppG1Y" type="text/javascript"></script>
+
 <script type="text/javascript" src="js/func.js"></script>
 <script type="text/javascript"  src="js/map.js"></script>
 </body>

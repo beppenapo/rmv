@@ -1,6 +1,19 @@
  <div class="flexslider">
   <ul class="slides">
     <li>
+     <img src="img/gallery/smm_veduta_aerea.png" />
+     <div class="overlayDiv">
+      <div class="container">
+        <h1>Comune di Santa Maria a Monte</h1>
+        <p>Foto aerea del centro storico</p>
+        <div class="containerFooter">
+         
+        </div>
+       </div>
+
+     </div>
+    </li>
+    <li>
       <img src="img/gallery/01.png" />
       <div class="overlayDiv">
        <div class="container">

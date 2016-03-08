@@ -164,14 +164,17 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
     <article>
      <div id="photoContent">
      <?php 
-       while($foto = pg_fetch_array($imgexec, NULL, PGSQL_ASSOC)){
+       while($foto = pg_fetch_array($imgexec)){
+        $descrizione = str_replace("\"", "''",$foto['descr_foto']);
         echo "<div class='wrapThumb'>";
         echo "<div class='photoTool'>";        
-        echo "<a href='#' class='viewThumb photoButton' data-id='".$foto['id_foto']."' title='Ingrandisci l&#39;immagine'><i class='fa fa-eye'></i></a>";
-        echo '<a href="#" class="photoButton upPhoto" data-dida="'.$foto['descr_foto'].'" data-id="'.$foto['id_foto'].'" title="Modifica la didascalia della foto"><i class="fa fa-cog fa-2x"></i></a>';
-        echo "<a href='#' class='photoButton delPhoto' data-path='".$foto['percorso_foto']."' data-id='".$foto['id_foto']."' title='Elimina la foto'><i class='fa fa-times fa-2x'></i></a>";
+            echo "<a href='#' class='viewThumb photoButton' data-id='".$foto['id_foto']."' title='Ingrandisci l&#39;immagine'><i class='fa fa-eye'></i></a>";
+        if($_SESSION['id_user']){
+            echo '<a href="#" class="photoButton upPhoto" data-dida="'.$descrizione.'" data-id="'.$foto['id_foto'].'" title="Modifica la didascalia della foto"><i class="fa fa-cog fa-2x"></i></a>';
+            echo "<a href='#' class='photoButton delPhoto' data-path='".$foto['percorso_foto']."' data-id='".$foto['id_foto']."' title='Elimina la foto'><i class='fa fa-times fa-2x'></i></a>";
+        }
         echo "</div>";
-        echo '<img src="foto/'.$foto['percorso_foto'].'" alt="'.addslashes($foto['descr_foto']).'" class="thumb" title="'.$foto['descr_foto'].'">';
+        echo '<img src="foto/'.$foto['percorso_foto'].'" alt="'.$descrizione.'" class="thumb" title="'.$descrizione.'">';
         echo "</div>";
        }
      ?>
@@ -520,8 +523,23 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
 <script type="text/javascript">
 var idPoi = <?php echo $id; ?>;
 $(document).ready(function() {
+
+    $.fn.resize=function(a){
+        var d=Math.ceil;
+        if(a==null)a=200;
+        var e=a, f=a;
+        $(this).each(function(){
+            var b=$(this).height(),c=$(this).width();
+            if(b>c)f=d(c/b*a);
+            else e=d(b/c*a);
+            $(this).css({height:e,width:f});
+        })
+    };
+    var thumbWidth = $(".wrapThumb").width();
+    $('.wrapThumb img').resize(thumbWidth);
+
     $("a.button, a.photoButton").click(function(e){e.preventDefault();})
-    $(".myDialogContentHeader i").click(function(){$(".myDialog").fadeOut('fast');});
+    $(".myDialogContentHeader i").click(function(){$(".myDialog").fadeOut('fast'); scroll();});
     var ratio = 0;
     var widthDef;
     var heightDef;
@@ -533,7 +551,7 @@ $(document).ready(function() {
         var foto = $(this).data('id');
         var path = $(this).data('path');
         $("#delFoto input[name=foto]").val(foto);
-        $('#delFoto').fadeIn('fast');
+        $('#delFoto').fadeIn('fast', function(){noScroll();});
         $("button[name=delFotoButt]").click(function(){
             $.ajax({
                 url: 'inc/delFoto.php',
@@ -553,7 +571,7 @@ $(document).ready(function() {
         var didascalia = $(this).data('dida');
         $("#upDidascalia input[name=foto]").val(foto);
         $("#upDidascalia textarea[name=didascalia]").val(didascalia);
-        $('#upDidascalia').fadeIn('fast');
+        $('#upDidascalia').fadeIn('fast', function(){noScroll();});
         $("button[name=didascaliaButt]").click(function(){
             var didascalia = $("#upDidascalia textarea[name=didascalia]").val();
             $.ajax({
@@ -569,9 +587,14 @@ $(document).ready(function() {
         
     });
  
+    $( ".photoTool a" ).on({
+        mouseenter: function() {$(this).parent('div').css("background","rgba(0,0,0,0.8)").addClass("transition");}, 
+        mouseleave: function() {$(this).parent('div').css("background","rgba(0,0,0,0.3)").removeClass("transition");}
+    });
  
+    
     $("#modDescr").click(function(){
-        $('#updateDescriz').fadeIn('fast');
+        $('#updateDescriz').fadeIn('fast', function(){noScroll();});
         $("button[name=upDescriz]").click(function(){
             var newDescr = $("textarea[name=newDescr]").val();
             if(!newDescr){$("#msgDescr").text('Devi inserire una descrizione'); return false;}
@@ -583,13 +606,13 @@ $(document).ready(function() {
                     var txt = newDescr.replace(/\n/g,"<br>");
                     $("#DescrizioneContent").html(txt);
                     $("#msgDescr").text(data);
-                    $("#updateDescriz").delay(3000).fadeOut('fast', function(){$("#msgDescr").text('');});
+                    $("#updateDescriz").delay(3000).fadeOut('fast', function(){$("#msgDescr").text('');scroll();});
                 }
             }); //fine ajax
         });
     });
     $('#modInfo').click(function(){ 
-        $('#updateInfo').fadeIn('fast'); 
+        $('#updateInfo').fadeIn('fast', function(){noScroll();}); 
         $("button[name=upInfo]").click(function(){
             var inv = $("textarea[name=inv]").val();
             var nome = $("textarea[name=nome]").val();
@@ -654,7 +677,7 @@ function init() {
     new OpenLayers.Control.TouchNavigation({dragPanOptions: {enableKinetic: true}})
    ],
    resolutions: [156543.03390625, 78271.516953125, 39135.7584765625, 19567.87923828125, 9783.939619140625, 4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033, 9.554628534317017, 4.777314267158508, 2.388657133579254, 1.194328566789627, 0.5971642833948135, 0.29858214169740677, 0.14929107084870338, 0.07464553542435169, 0.037322767712175846, 0.018661383856087923, 0.009330691928043961, 0.004665345964021981, 0.0023326729820109904, 0.0011663364910054952, 5.831682455027476E-4, 2.915841227513738E-4, 1.457920613756869E-4],
-  maxExtent:new OpenLayers.Bounds (-20037508.34,-20037508.34,20037508.34,20037508.34),
+   maxExtent: new OpenLayers.Bounds (-20037508.34,-20037508.34,20037508.34,20037508.34),
    units: 'm',
    projection: new OpenLayers.Projection("EPSG:3857"),
    displayProjection: new OpenLayers.Projection("EPSG:4326")
@@ -712,7 +735,7 @@ var utm2 = new OpenLayers.Projection("EPSG:3857");
 
 var ll2= new OpenLayers.LonLat(lon,lat);
 var newll2 =  ll2.transform(wgs2, map2.getProjectionObject());
-map2.setCenter(newll2,15);
+map2.setCenter(newll2,18);
 
 $("#print").click(function(){print();map.updateSize();});
 
