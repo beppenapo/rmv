@@ -3,7 +3,7 @@ session_start();
 require("inc/db.php");
 $id=$_GET['id'];
 $poi="
- SELECT 
+ SELECT
   sito.id
 , sito.inv
 , sito.sito
@@ -48,19 +48,19 @@ $poi="
 , st_x(st_transform(sito.the_geom, 4326)) AS lon
 , st_y(st_transform(sito.the_geom, 4326)) AS lat
 FROM sito, liste.accessibilita, liste.definizione_generale, liste.definizione_specifica, liste.materiale, liste.microtoponimo, liste.sito_tipo, liste.stato_conservazione, liste.tecnica, liste.toponimo, liste.localita, comuni, province, liste.periodo_cultura, usr
-WHERE sito.id_accessibilita = accessibilita.id_accessibilita 
-  AND sito.id_def_generale = definizione_generale.id_def_generale 
-  AND sito.id_def_specifica = definizione_specifica.id_def_specifica 
-  AND sito.id_materiale = materiale.id_materiale 
-  AND sito.id_microtoponimo = microtoponimo.id_microtoponimo 
-  AND sito.id_sito_tipo = sito_tipo.id_sito_tipo 
-  AND sito.id_stato_conservazione = stato_conservazione.id_stato_conservazione 
-  AND sito.id_tecnica = tecnica.id_tecnica 
-  AND sito.id_toponimo = toponimo.id_toponimo 
-  AND sito.id_localita = localita.id_localita 
-  AND sito.id_periodo = periodo_cultura.id_periodo_cultura 
-  AND sito.id_comune = comuni.gid AND comuni.id_provinc::text = province.id_provinc::text 
-  AND sito.id_compilatore = usr.id 
+WHERE sito.id_accessibilita = accessibilita.id_accessibilita
+  AND sito.id_def_generale = definizione_generale.id_def_generale
+  AND sito.id_def_specifica = definizione_specifica.id_def_specifica
+  AND sito.id_materiale = materiale.id_materiale
+  AND sito.id_microtoponimo = microtoponimo.id_microtoponimo
+  AND sito.id_sito_tipo = sito_tipo.id_sito_tipo
+  AND sito.id_stato_conservazione = stato_conservazione.id_stato_conservazione
+  AND sito.id_tecnica = tecnica.id_tecnica
+  AND sito.id_toponimo = toponimo.id_toponimo
+  AND sito.id_localita = localita.id_localita
+  AND sito.id_periodo = periodo_cultura.id_periodo_cultura
+  AND sito.id_comune = comuni.gid AND comuni.id_provinc::text = province.id_provinc::text
+  AND sito.id_compilatore = usr.id
   AND sito.id = $id";
 $poiexec = pg_query($connection, $poi);
 $arr = pg_fetch_array($poiexec, 0, PGSQL_ASSOC);
@@ -110,7 +110,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
  .olControlZoom a:hover{background:#A42929 !important;}
  .olControlZoomIn { border-radius: 4px 4px 0 0;}
  .olControlZoomOut { border-radius: 0px !important;}
- .olControlZoom #max{border-radius: 0 0 4px 4px;} 
+ .olControlZoom #max{border-radius: 0 0 4px 4px;}
  #mainContentWrap section { display:block; width: 100%;padding:0px !important;}
  #mainContentWrap header#descrizione {color: #0A0062;border-bottom: 1px solid #0A0062;}
  #mainContentWrap header#galleria {color: #A42929;border-bottom: 1px solid #A42929;}
@@ -131,12 +131,12 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
 </style>
 </head>
 <body onload="init()">
- <header id="head"><?php require_once('inc/head.php')?></header>
+ <header id="head"><?php require_once('inc/head.php'); ?></header>
 <div id="wrapMain">
  <div id="map">
   <div class="mapTitle"><h1><?php echo($h1); ?></h1></div>
  </div>
- 
+
  <div id="mapPrint">
   <div class="mapTitle"><h1><?php echo($h1); ?></h1></div>
  </div>
@@ -149,11 +149,11 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
    <a href="#" id="modFoto" class="button"><i class="fa fa-picture-o fa-fw"></i> aggiungi foto</a>
   <?php } ?>
    <a href="#" id="print" class="button"><i class="fa fa-file-pdf-o fa-fw"></i> Stampa</a>
-   <section> 
+   <section>
     <header id="descrizione"><span lang="it"><i class="fa fa-file-text-o"></i> Descrizione</span></header>
     <article id="DescrizioneContent"><?php echo(nl2br($arr['descrizione'])); ?></article>
    </section>
-   <?php 
+   <?php
     $imgq = ("select * from foto_poi where id_poi = $id;");
     $imgexec = pg_query($connection, $imgq);
     $imgrow = pg_num_rows($imgexec);
@@ -163,11 +163,11 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
     <header id="galleria"><span lang="it"><i class="fa fa-picture-o"></i> Galleria fotografica </span></header>
     <article>
      <div id="photoContent">
-     <?php 
+     <?php
        while($foto = pg_fetch_array($imgexec)){
         $descrizione = str_replace("\"", "''",$foto['descr_foto']);
         echo "<div class='wrapThumb'>";
-        echo "<div class='photoTool'>";        
+        echo "<div class='photoTool'>";
             echo "<a href='#' class='viewThumb photoButton' data-id='".$foto['id_foto']."' title='Ingrandisci l&#39;immagine'><i class='fa fa-eye'></i></a>";
         if($_SESSION['id_user']){
             echo '<a href="#" class="photoButton upPhoto" data-dida="'.$descrizione.'" data-id="'.$foto['id_foto'].'" title="Modifica la didascalia della foto"><i class="fa fa-cog fa-2x"></i></a>';
@@ -183,10 +183,10 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
      <br style="clear:both" />
     </article>
    </section>
-   <section> 
+   <section>
     <header id="info"><span lang="it"><i class="fa fa-thumb-tack"></i> Info</span></header>
     <article id="infoContent">
-    <?php 
+    <?php
     if(isset($_SESSION['id_user'])){
      if($inv){?><span class="key">Inv./Nctn : </span><span class="value"><?php echo($inv); ?></span><hr><?php }
     }
@@ -221,9 +221,9 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
   <div id="nav">
    <aside>
     <section id="loginWrap">
-     <?php 
+     <?php
       if(isset($_SESSION['id_user'])){include_once('inc/usrmenu.php'); }
-      else{include_once('inc/login_form.php');} 
+      else{include_once('inc/login_form.php');}
      ?>
     </section>
     <section id="navLink">
@@ -262,7 +262,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="myDialog" id="updateInfo">
     <div class="myDialogWrapContent">
@@ -275,11 +275,11 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
                         <label>inv/nctn</label>
                         <textarea name="inv"><?php echo($inv); ?></textarea>
                     </div>
-                    <div> 
+                    <div>
                         <label>* nome sito</label>
                         <textarea name="nome" class="obbligatorio"><?php echo $arr['sito_nome']; ?></textarea>
                     </div>
-                    <div> 
+                    <div>
                         <label>* Comune</label>
                         <input class="autocompletamento obbligatorio" id="comuneList" value="<?php echo $arr['comune']; ?>" data-campo="comune" type="search">
                         <input type="hidden" value="<?php echo $arr['id_comune']; ?>" id="comune" name="comune">
@@ -422,7 +422,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
                     <div>
                         <label>materiale</label>
                         <select name="materiale">
-                            <?php 
+                            <?php
                             $q6=("SELECT * FROM liste.materiale order by materiale asc;");
                             $ex6 = pg_query($connection, $q6);
                             while($mat = pg_fetch_array($ex6)){
@@ -435,7 +435,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
                     <div>
                         <label>tecnica</label>
                         <select name="tecnica">
-                            <?php 
+                            <?php
                             $tecq="SELECT * FROM liste.tecnica where id_materiale = ".$arr['id_materiale']." or id_tecnica = 27 order by tecnica asc;";
                             $tece = pg_query($connection, $tecq);
                             while($tec = pg_fetch_array($tece)){
@@ -463,7 +463,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="myDialog" id="divFotoDialog">
     <div class="myDialogWrapContent">
@@ -479,7 +479,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="myDialog" id="delFoto">
     <div class="myDialogWrapContent">
@@ -494,7 +494,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <div class="myDialog" id="upDidascalia">
     <div class="myDialogWrapContent">
@@ -510,16 +510,16 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jq-ui/js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="js/lang/js/jquery-cookie.js" charset="utf-8" type="text/javascript"></script>
 <script src="js/lang/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
-<script type="text/javascript" src="js/ol2.13/OpenLayers.js"></script> 
+<script type="text/javascript" src="js/ol2.13/OpenLayers.js"></script>
 <script type="text/javascript" src="js/func.js"></script>
-<script type="text/javascript" src="js/dinSelect.js"></script> 
+<script type="text/javascript" src="js/dinSelect.js"></script>
 <script type="text/javascript">
 var idPoi = <?php echo $id; ?>;
 $(document).ready(function() {
@@ -546,7 +546,7 @@ $(document).ready(function() {
     $('.thumb').css({width:'100%'});
     $(".viewThumb").click(function(){var foto = $(this).parent().next('img'); maximFoto(foto); });
     $('.thumb').click(function(){ var foto = $(this); maximFoto(foto); });
-    
+
     $('.delPhoto').on("click", function(){
         var foto = $(this).data('id');
         var path = $(this).data('path');
@@ -555,17 +555,17 @@ $(document).ready(function() {
         $("button[name=delFotoButt]").click(function(){
             $.ajax({
                 url: 'inc/delFoto.php',
-                type: 'POST', 
-                data: {foto:foto, path:path}, 
+                type: 'POST',
+                data: {foto:foto, path:path},
                 success: function(data){
                     $("#msgDelFoto").text(data);
                     $("#delFoto").delay(3000).fadeOut('fast', function(){location.reload();});
                 }
             }); //fine ajax
         });
-        
+
     });
-    
+
     $('.upPhoto').on("click", function(){
         var foto = $(this).data('id');
         var didascalia = $(this).data('dida');
@@ -576,23 +576,23 @@ $(document).ready(function() {
             var didascalia = $("#upDidascalia textarea[name=didascalia]").val();
             $.ajax({
                 url: 'inc/updateFoto.php',
-                type: 'POST', 
-                data: {foto:foto, didascalia:didascalia}, 
+                type: 'POST',
+                data: {foto:foto, didascalia:didascalia},
                 success: function(data){
                     $("#msgDidascalia").text(data);
                     $("#upDidascalia").delay(3000).fadeOut('fast', function(){location.reload();});
                 }
             });
         });
-        
+
     });
- 
+
     $( ".photoTool a" ).on({
-        mouseenter: function() {$(this).parent('div').css("background","rgba(0,0,0,0.8)").addClass("transition");}, 
+        mouseenter: function() {$(this).parent('div').css("background","rgba(0,0,0,0.8)").addClass("transition");},
         mouseleave: function() {$(this).parent('div').css("background","rgba(0,0,0,0.3)").removeClass("transition");}
     });
- 
-    
+
+
     $("#modDescr").click(function(){
         $('#updateDescriz').fadeIn('fast', function(){noScroll();});
         $("button[name=upDescriz]").click(function(){
@@ -600,8 +600,8 @@ $(document).ready(function() {
             if(!newDescr){$("#msgDescr").text('Devi inserire una descrizione'); return false;}
             $.ajax({
                 url: 'inc/updateDescr.php',
-                type: 'POST', 
-                data: {id:idPoi, descr:newDescr}, 
+                type: 'POST',
+                data: {id:idPoi, descr:newDescr},
                 success: function(data){
                     var txt = newDescr.replace(/\n/g,"<br>");
                     $("#DescrizioneContent").html(txt);
@@ -611,8 +611,8 @@ $(document).ready(function() {
             }); //fine ajax
         });
     });
-    $('#modInfo').click(function(){ 
-        $('#updateInfo').fadeIn('fast', function(){noScroll();}); 
+    $('#modInfo').click(function(){
+        $('#updateInfo').fadeIn('fast', function(){noScroll();});
         $("button[name=upInfo]").click(function(){
             var inv = $("textarea[name=inv]").val();
             var nome = $("textarea[name=nome]").val();
@@ -647,13 +647,13 @@ $(document).ready(function() {
                 var data = {id:idPoi, inv:inv, nome:nome, comune:comune, localita:localita, toponimo:toponimo, microtoponimo:microtoponimo, posizione:posizione, tipologia:tipologia, periodo:periodo, cronoiniz:cronoiniz, cronofin:cronofin, funzionario:funzionario, accessibilita:accessibilita, defgen:defgen, icona:icona, defspec:defspec, conservazione:conservazione, materiale:materiale, tecnica:tecnica, contatti:contatti, link:link, note:note};
                 $.ajax({
                     url: 'inc/updateInfo.php',
-                    type: 'POST', 
-                    data: data, 
+                    type: 'POST',
+                    data: data,
                     success: function(data){
                         $("#msgInfo").text(data).delay(3000).fadeOut('fast', function(){location.reload();});
                     }
                 }); //fine ajax
-            }        
+            }
         });
     });
     $('#modFoto').click(function(){ $('#divFotoDialog').fadeIn('fast'); });
@@ -683,12 +683,12 @@ function init() {
    displayProjection: new OpenLayers.Projection("EPSG:4326")
  });
 
- 
+
 arrayOSM = ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"];
-            
+
 baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, {transitionEffect: "resize"});
 map.addLayer(baseOSM);
 
@@ -705,7 +705,7 @@ map.setCenter(newll,15);
 
 var ext = map.getExtent();
 extent = new OpenLayers.Bounds(ext.left,ext.bottom, ext.right,ext.top);
-$('.olControlZoom').append('<a href="#" id="max" title="torna allo zoom iniziale"><i class="fa fa-globe"></i></a>'); 
+$('.olControlZoom').append('<a href="#" id="max" title="torna allo zoom iniziale"><i class="fa fa-globe"></i></a>');
 $('.olControlZoomIn').attr("title","Ingrandisci la mappa");
 $('.olControlZoomOut').attr("title","Diminuisci la mappa");
 $("#max").click(function(){map.zoomToExtent(extent);});
@@ -718,12 +718,12 @@ map2 = new OpenLayers.Map ("mapPrint", {
    projection: new OpenLayers.Projection("EPSG:3857")
  });
 
- 
+
 var arrayOSM2 = ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"];
-            
+
 var baseOSM2 = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM2, {transitionEffect: "resize"});
 map2.addLayer(baseOSM2);
 

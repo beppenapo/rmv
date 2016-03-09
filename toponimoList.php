@@ -13,6 +13,8 @@ group by t.id_toponimo, t.id_comune, t.id_localita, t.toponimo, l.localita, c.no
 order by comune asc, localita asc, toponimo asc;
 ");
 $result=pg_query($connection, $query);
+$r = pg_num_rows($result);
+$header = (!$r) ? 'Non sono presenti toponimi nel database ' : 'Lista completa dei toponimi presenti nel database ('.$r.')';
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,9 +47,10 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
  <div id="wrapMain">
    <div id="mainContent" class="wrapContent">
     <div id="mainContentWrap">
+      <?php if($_SESSION['id_user']){?>
       <section id="toggleForm">
         <header id="toggleButton">Inserisci un nuovo toponimo</header>
-        <div id="toggleDiv" style="<?php echo $classToggle; ?>">
+        <div id="toggleDiv">
           <div id="newRec">
             <form name="toponimoForm" action="#">
               <label>Comune</label>
@@ -64,7 +67,7 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
         </div>
       </section>
       <section id="tabella">
-        <header><span lang="it">Lista completa dei toponimi presenti nel database</span></header>
+        <header><span lang="it"><?php echo $header; ?></span></header>
         <div id="filtri">
           <input type="search" placeholder="cerca toponimo" id="filtro">
           <i class="fa fa-undo clear-filter" title="Pulisci filtro"></i>
@@ -105,6 +108,7 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
              </tfoot>
        </table>
        </section>
+       <?php }else{require_once("inc/noaccess.php");} ?>
        </div>
  <div id="nav">
  <aside>
@@ -217,6 +221,17 @@ $(document).ready(function() {
           }
         });//ajax
       }
+    });
+
+    $('#comune').on('click', function(){
+      $('#comune').on('search keyup', function(){
+        if(!this.value){
+          $('select[name=localita]').val('').prop("disabled", true);
+          $('input[name=toponimo]').val('').prop("disabled", true);
+          $('input[name=addTopo]').prop("disabled", true);
+        }
+      });
+      setTimeout(function() { $('#comune').off('search');}, 1);
     });
 
   $(".modTopo").click(function(){

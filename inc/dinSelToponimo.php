@@ -6,16 +6,14 @@ if($_POST['id']){
  $result = pg_query($connection, $query);
  $righe = pg_num_rows($result);
  if($righe > 0){
-  echo '<option value="12">-- seleziona toponimo --</option>';
+  echo '<option value="0" selected disabled>-- seleziona toponimo --</option>';
   while($row = pg_fetch_array($result)){
    $id_toponimo=$row['id_toponimo'];
    $toponimo=$row['toponimo'];
    echo '<option value="'.$id_toponimo.'">'.$toponimo.'</option>';
   }
-  //echo '<option value="12">Non determinabile</option>';
  }else{
-  echo '<option value="12">-- nessun toponimo associato --</option>';
-  //echo '<option value="12">Non determinabile</option>';
+  echo '<option value="" selected>-- nessun toponimo associato --</option>';
  }
 }
 ?>

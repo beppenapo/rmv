@@ -27,7 +27,7 @@
  <ul>
   <li><a href="localitaList.php">località</a></li>
   <li><a href="toponimoList.php">toponimi</a></li>
-  <li><a href="#">microtoponimi</a></li>
+  <li><a href="microTopoList.php">microtoponimi</a></li>
  </ul>
 </nav>
 </div>

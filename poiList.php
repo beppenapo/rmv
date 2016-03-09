@@ -7,7 +7,7 @@ FROM sito, liste.localita, comuni, liste.sito_tipo, liste.definizione_specifica,
 WHERE sito.id_comune = comuni.gid AND sito.id_sito_tipo = sito_tipo.id_sito_tipo AND sito.id_def_specifica = definizione_specifica.id_def_specifica AND sito.id_periodo = periodo_cultura.id_periodo_cultura AND sito.id_accessibilita = accessibilita.id_accessibilita order by comune asc, data_compilazione desc, poi asc;");
 $result=pg_query($connection, $query);
 $row = pg_num_rows($result);
-
+$header = (!$row) ? 'Non sono presenti punti di interesse nel database ' : 'Lista completa dei puti di interesse presenti nel database ('.$row.')';
 //filtro comune
 $q2=("SELECT distinct c.gid, c.nome AS comune FROM comuni c, sito where sito.id_comune = c.gid order by comune asc;");
 $res2=pg_query($connection, $q2);
@@ -36,16 +36,16 @@ $row5= pg_num_rows($res5);
 <style>
  #mainContentWrap {margin:0px !important;}
  #mainContentWrap section{float:none; width:100%;}
- #mainContentWrap header {font-size: 1.8em;border-bottom: 1px solid #0A0062;margin: 10px 0px 20px;color: #0A0062;}
 </style>
 </head>
 <body>
- <header id="head"><?php require_once('inc/head.php')?></header>
+ <header id="head"><?php require_once('inc/head.php'); ?></header>
  <div id="wrapMain">
   <div id="mainContent" class="wrapContent">
    <div id="mainContentWrap">
+     <?php if($_SESSION['id_user']){?>
     <section>
-     <header><span lang="it">Lista completa dei punti di interesse presenti nel database</span></header>
+     <header><span lang="it"><?php echo $header; ?></span></header>
      <div id="filtri">
       <input type="search" placeholder="inserisci una o più parole separate da uno spazio" id="filtro">
       <i class="fa fa-undo clear-filter" title="Pulisci filtro"></i>
@@ -74,7 +74,7 @@ $row5= pg_num_rows($res5);
          $periodo = pg_result($result, $x,"periodo");
          $accessibilita = pg_result($result, $x,"accessibilita");
          $accessibilita = ($accessibilita == 'non determinabile')?'':$accessibilita;
-         $tipo = ($tipo == 'non determinabile')?'':$tipo;      
+         $tipo = ($tipo == 'non determinabile')?'':$tipo;
          $periodo = ($periodo == 'Non determinabile')?'':$periodo;
          echo "<tr class='csv'>
                 <td>$poi</td>
@@ -97,13 +97,14 @@ $row5= pg_num_rows($res5);
       </tfoot>
      </table>
    </section>
+   <?php }else{require_once("inc/noaccess.php");} ?>
   </div>
   <div id="nav">
    <aside>
     <section id="loginWrap">
-     <?php 
+     <?php
       if(isset($_SESSION['id_user'])){include_once('inc/usrmenu.php'); }
-      else{include_once('inc/login_form.php');} 
+      else{include_once('inc/login_form.php');}
      ?>
     </section>
     <section id="navLink">
@@ -130,7 +131,7 @@ $row5= pg_num_rows($res5);
 <script type="text/javascript" src="js/func.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
- $("#poiLink").addClass('active').click(function(e){e.preventDefault();}); 
+ $("#poiLink").addClass('active').click(function(e){e.preventDefault();});
  $('.footable').footable();
 
  $('.clear-filter').click(function (e) {
@@ -138,11 +139,11 @@ $(document).ready(function() {
   $("#filtri span").text('');
   $('.footable').trigger('footable_clear_filter');
  });
- 
+
  $("#csv").click(function (event) {
    exportTableToCSV.apply(this, [$('.zebra'), 'catalogo.csv']);
- }); 
- 
+ });
+
  });
 </script>
 </body>
