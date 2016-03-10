@@ -43,7 +43,6 @@ $row5= pg_num_rows($res5);
  <div id="wrapMain">
   <div id="mainContent" class="wrapContent">
    <div id="mainContentWrap">
-     <?php if($_SESSION['id_user']){?>
     <section>
      <header><span lang="it"><?php echo $header; ?></span></header>
      <div id="filtri">
@@ -97,7 +96,6 @@ $row5= pg_num_rows($res5);
       </tfoot>
      </table>
    </section>
-   <?php }else{require_once("inc/noaccess.php");} ?>
   </div>
   <div id="nav">
    <aside>
