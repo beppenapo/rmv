@@ -325,8 +325,6 @@ $(document).ready(function() {
 
  $("#result").css("width", resultWidth);
 
- $("#mappaLink").addClass('active').click(function(e){e.preventDefault();});
-
  $("#map").height(windowY-headH-5);
  $("#menuMap").css("width", "22px");
 
