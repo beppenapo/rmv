@@ -511,6 +511,22 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
         </div>
     </div>
 </div>
+<div class="myDialog" id="delPoiForm">
+    <div class="myDialogWrapContent">
+        <div class="myDialogContent">
+            <div class="myDialogContentHeader"><i class="fa fa-times"></i></div>
+            <div class="myDialogContentMain">
+                <form>
+                    <h1 class="warning">Attenzione, stai per eliminare un punto di interesse!</h1>
+                    <p>Se decidi di cancellare una scheda, eliminerai definitivamente anche tutti i dati ad esso associati, comprese foto e immagini caricate sul server.</p>
+                    <p id="delMsg"></p>
+                    <button type="button" name="delButton">Ok, elimina la scheda</button>
+                    <button type="button" name="noDelButton">No, annulla operazione</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="js/jquery.js"></script>
@@ -657,6 +673,24 @@ $(document).ready(function() {
         });
     });
     $('#modFoto').click(function(){ $('#divFotoDialog').fadeIn('fast'); });
+
+    $("#delPoiLink").on("click", function(){
+      noScroll();
+      var i = $(this).data('id');
+      $("#delPoiForm").fadeIn('fast');
+      $(".myDialogContent").css("height","auto");
+      $("button[name=noDelButton]").on("click", function(){ $(".myDialog").fadeOut('fast', function(){scroll();}); });
+      $("button[name=delButton]").on("click", function(){
+        $.ajax({
+            url: 'inc/delPoi.php',
+            type: 'POST',
+            data: {id:i},
+            success: function(data){
+                $("#delMsg").html(data).delay(3000).fadeOut('fast', function(){window.href.location="index.php";});
+            }
+        });
+      });
+    });
 });
 
 /*************************************/

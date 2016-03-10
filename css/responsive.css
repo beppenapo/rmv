@@ -212,5 +212,8 @@ a.button:hover{background:#A42929; color:#fff;}
     .myDialogContent{position:relative;background:#fff;width:600px; height:550px; margin:0px auto;}
     .myDialogContentHeader{text-align:right;padding:5px 10px;background: rgb(237,237,237);}
     .myDialogContentHeader i{cursor:pointer;}
-    .myDialogContentMain{height:90%;overflow:auto;}
+    .myDialogContentMain{height:90%;overflow:auto;text-align: center;}
+    .myDialogContentMain h1{font-size:1.5rem;}
+    .myDialogContentMain h1, .myDialogContentMain p{margin-bottom:10px;}
+    .myDialogContentMain h1.warning{color:red;}
     #updateInfo textarea{height:16px;}
