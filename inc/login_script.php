@@ -18,8 +18,10 @@ if ($pwd == $array['pwd']) {
   $_SESSION['nome']=$array["nome"];
   $_SESSION['cognome']=$array["cognome"];
   $_SESSION['classe']=$array['classe'];
-  $_SESSION['email']=$array['email']; 
-  $_SESSION['salt']=$array['salt']; 
+  $_SESSION['email']=$array['email'];
+  $_SESSION['salt']=$array['salt'];
+
+  $log=pg_query($connection, "insert into login(id_user) values(".$array['id'].");");
 
   header("Location:".$url);
   exit;
