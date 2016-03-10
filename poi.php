@@ -686,7 +686,7 @@ $(document).ready(function() {
             type: 'POST',
             data: {id:i},
             success: function(data){
-                $("#delMsg").html(data).delay(3000).fadeOut('fast', function(){window.href.location="index.php";});
+                $("#delMsg").html(data).delay(3000).fadeOut('fast', function(){window.location.href="poiList.php";});
             }
         });
       });
