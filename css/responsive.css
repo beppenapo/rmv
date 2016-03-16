@@ -47,7 +47,7 @@ footer #navFooter a{border-bottom:1px dotted;}
 footer #navFooter li{width:15%;}
 footer #social{margin:10px 0px;}
 .wrapContent{margin:0 auto;width:95%;}
-.intro{position:relative;display:inline-block;width:100%;margin:0px;background-color:#87746A;box-shadow: 0 0px 30px rgba(0,0,0,1);}
+.intro{position:relative;display:inline-block;width:100%;margin:0px;box-shadow: 0 0px 30px rgba(0,0,0,1); background:url("../img/introBg.png") no-repeat center center; background-size: cover;}
 .intro .colDx{position:relative;margin:4% auto;color:#fff;font-size:1em;line-height:1.5;}
 #mainContent{margin:20px auto;}
 #mainContentWrap section{margin:10px 0px;}
@@ -64,7 +64,6 @@ footer #social{margin:10px 0px;}
 #mainContentWrap a.linkSezInfo{background-color:rgb(164,41,41);}
 #mainContentWrap section, #nav{clear:both;}
 #nav{font-size:1em;}
-.intro .colSx{display:none;}
 .intro .colDx{width:97%;}
 
 #nav section {float: left;width: 48%;margin-top:20px;}
@@ -186,9 +185,7 @@ a.button:hover{background:#A42929; color:#fff;}
     .container .containerFooter{display:inline;position:absolute;bottom:2%;right:5%;font-size:0.750em;}
     footer #navFooter li{width:6%;}
     .wrapContent{width:80%;}
-    .intro .colSx{display:inline;position:relative;width:40%;float:left;text-align:center;}
-    .intro .colSx img{width:50%;}
-    .intro .colDx{width:60%;float:left;}
+    .intro .colDx{width:60%;float:right;}
     #mainContentWrap{width:80%; float:left;}
     #mainContentWrap section{float:left;width:30%;}
     #mainContentWrap section:nth-child(2){padding:0 5%;}
