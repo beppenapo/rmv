@@ -3,7 +3,7 @@ require("inc/db.php");
 //select comuni
 $a='SELECT c.gid, c.nome, st_extent(c.the_geom) as ext FROM sito, comuni c WHERE sito.id_comune = c.gid group by c.gid, c.nome ,c.the_geom';
 $aa=pg_query($connection, $a);
-$comuni = "<option value='0'>tutti i Comuni</option>";
+$comuni = "<option value='1160225,5397418,1244871,5441706'>tutti i Comuni</option>";
 while($aList = pg_fetch_array($aa)){
     $ext = str_replace(" ",",",substr($aList[ext],4,-1));
     $comuni .= "<option value='".str_replace(" ",",",substr($aList[ext],4,-1))."'>".$aList[nome]."</option>";
