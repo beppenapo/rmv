@@ -20,6 +20,8 @@
 #result{position:absolute;top:30%;left:0;height:70%;display:inline-block;background:rgba(255,255,255,0.9);box-shadow: 0 0px 30px rgba(0,0,0,1);z-index:2000;}
 #resultHeader{display:block;text-align:right;background-color:#7E7E7E;}
 #resultContent{position:relative;width:100%;height:96%;/*margin:1%;padding:1%;*/font-size:0.8em;overflow:auto;}
+#mapTool{position: absolute;top: 10px; left: 100px; z-index: 2000; padding: 5px; background: rgba(255,255,255,0.5); border-radius: 3px;}
+#mapTool select{border-radius:3px;width:auto !important;}
 .ulpopup li{padding-bottom:4%;}
 .ulpopup li:nth-child(even){background-color:#EDEDED;}
 .ulpopup span{display:inline-block;width:48%;vertical-align:top;}

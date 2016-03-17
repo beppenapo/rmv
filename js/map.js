@@ -3,7 +3,6 @@ var switcherWidth, resultWidth;
 //variabili OL
 var map, extent, gsat, osm, arrayOSM, arrayAerial, baseOSM, baseAerial, poi, highlightLayer,featHiLite; //layer
 var info, geolocate, filter, layers,selectFeatureControl, stile;//controlli
-
 $(document).ready(function() {
 
  if(windowX < 481){ //smartphone
@@ -211,4 +210,10 @@ $('.olControlZoom').append('<a href="#" id="max" title="torna allo zoom iniziale
 $('.olControlZoomIn').attr("title","Ingrandisci la mappa");
 $('.olControlZoomOut').attr("title","Diminuisci la mappa");
 $("#max").click(function(){map.zoomToExtent(extent);});
+$("select[name=zoomComune]").change(function(){
+    var v = $(this).val();
+    var parse = v.split(',');
+    var newExt= new OpenLayers.Bounds(parse[0],parse[1],parse[2],parse[3]);
+    map.zoomToExtent(newExt,18);
+});
 } //end init mappa
