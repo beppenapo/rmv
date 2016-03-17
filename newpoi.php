@@ -257,19 +257,41 @@ require_once("inc/db.php");
 <script type="text/javascript" src="js/func.js"></script>
 <script type="text/javascript" src="js/dinSelect.js"></script>
 <script type="text/javascript">
+var switcherWidth, resultWidth;
+var map, extent, gsat, osm, arrayOSM, arrayAerial, baseOSM, baseAerial, poi, highlightLayer,featHiLite; //layer
+var info, geolocate, filter, layers,selectFeatureControl, stile;//controlli
 $(document).ready(function() {
- $("#newPoi,#resultSearch").hide();
- $('#annullaInserimento').click(function(){location.reload();});
-
- $('#salvaDati').click(onTriggerInsertar);
-
- $("#search").click(function(){
-  var q = $("#term").val();
-  geocode(q);
- });
+    $("#newPoi,#resultSearch").hide();
+    $('#annullaInserimento').click(function(){location.reload();});
+    $('#salvaDati').click(onTriggerInsertar);
+    $("#search").click(function(){ var q = $("#term").val(); geocode(q);});
+    if(windowX < 481){ //smartphone
+        switcherWidth = "150px";
+        resultWidth = "99%";
+        $(".switcherIco").remove();
+    } else if(windowX < 1024){ //tablet
+        switcherWidth = "180px";
+        resultWidth = "250px";
+    } else { //pc
+        switcherWidth = "200px";
+        resultWidth = "350px";
+    }
+    $("#result").css("width", resultWidth);
+    $("#map").height(windowY-headH-5);
+    $("#menuMap").css("width", "22px");
+    $("#switcher, #result").hide();
+    $("#menuMapIco").clickToggle(function(){
+        $("#menuMap").css("width", switcherWidth);
+        $("#switcher").show();
+    },function(){
+        $("#menuMap").css("width", "22px");
+        $("#switcher").hide();
+    });
+    $(".baselayers").on('change', function(){
+        $(".baselayers").closest('label').removeClass('layerActive');
+        $(this).closest('label').addClass('layerActive');
+    });
 });
-
-
 
 function geocode(q) {
   $.getJSON('http://nominatim.openstreetmap.org/search?format=json&q=' + q, function(data) {
@@ -300,51 +322,6 @@ function geocode(q) {
   });
 }
 
-
-//variabili jQuery
-var switcherWidth, resultWidth;
-//variabili OL
-var map, extent, gsat, osm, arrayOSM, arrayAerial, baseOSM, baseAerial, poi, highlightLayer,featHiLite; //layer
-var info, geolocate, filter, layers,selectFeatureControl, stile;//controlli
-
-$(document).ready(function() {
-
- if(windowX < 481){ //smartphone
-  switcherWidth = "150px";
-  resultWidth = "99%";
-  $(".switcherIco").remove();
- }
- else if(windowX < 1024){ //tablet
-  switcherWidth = "180px";
-  resultWidth = "250px";
- }
- else { //pc
-  switcherWidth = "200px";
-  resultWidth = "350px";
- }
-
- $("#result").css("width", resultWidth);
-
- $("#map").height(windowY-headH-5);
- $("#menuMap").css("width", "22px");
-
- $("#switcher, #result").hide();
- $("#menuMapIco").clickToggle(
-  function(){
-   $("#menuMap").css("width", switcherWidth);
-   $("#switcher").show();
-  },
-  function(){
-   $("#menuMap").css("width", "22px");
-   $("#switcher").hide();
-  }
- );
-
- $(".baselayers").on('change', function(){
-  $(".baselayers").closest('label').removeClass('layerActive');
-  $(this).closest('label').addClass('layerActive');
- });
-});
 function init() {
  OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
  format = 'image/png';

@@ -185,7 +185,7 @@ a.button:hover{background:#A42929; color:#fff;}
     .container .containerFooter{display:inline;position:absolute;bottom:2%;right:5%;font-size:0.750em;}
     footer #navFooter li{width:6%;}
     .wrapContent{width:80%;}
-    .intro .colDx{width:60%;float:right;}
+    .intro .colDx{width:90%;}
     #mainContentWrap{width:80%; float:left;}
     #mainContentWrap section{float:left;width:30%;}
     #mainContentWrap section:nth-child(2){padding:0 5%;}

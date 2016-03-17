@@ -13,7 +13,7 @@ if($_POST['id']){
    echo '<option value="'.$id_toponimo.'">'.$toponimo.'</option>';
   }
  }else{
-  echo '<option value="" selected>-- nessun toponimo associato --</option>';
+  echo '<option value="12" selected>-- nessun toponimo associato --</option>';
  }
 }
 ?>

@@ -7,7 +7,7 @@
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Contributing author: Tyler Smith (@mbmufffin)
- * 
+ *
  */
 /* ====================================================================================================================
  * FONT-FACE
@@ -22,56 +22,19 @@
 /* ====================================================================================================================
  * RESETS
  * ====================================================================================================================*/
-.flex-container a:hover,
-.flex-slider a:hover,
-.flex-container a:focus,
-.flex-slider a:focus {
-  outline: none;
-}
-.slides,
-.slides > li,
-.flex-control-nav,
-.flex-direction-nav {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.flex-pauseplay span {
-  text-transform: capitalize;
-}
+.flex-container a:hover,.flex-slider a:hover,.flex-container a:focus,.flex-slider a:focus { outline: none;}
+.slides,.slides > li,.flex-control-nav,.flex-direction-nav { margin: 0; padding: 0; list-style: none;}
+.flex-pauseplay span {text-transform: capitalize;}
 /* ====================================================================================================================
  * BASE STYLES
  * ====================================================================================================================*/
-.flexslider {
-  margin: 0;
-  padding: 0;
-}
-.flexslider .slides > li {
-  display: none;
-  -webkit-backface-visibility: hidden;
-  position:relative;/* aggiunto da me per visualizzare il testo sovrapposto alle foto */
-}
-.flexslider .slides img {
-  width: 100%;
-  display: block;
-}
-.flexslider .slides:after {
-  content: "\0020";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-html[xmlns] .flexslider .slides {
-  display: block;
-}
-* html .flexslider .slides {
-  height: 1%;
-}
-.no-js .flexslider .slides > li:first-child {
-  display: block;
-}
+.flexslider { margin: 0;padding: 0;}
+.flexslider .slides > li { display: none; -webkit-backface-visibility: hidden; position:relative;/* aggiunto da me per visualizzare il testo sovrapposto alle foto */}
+.flexslider .slides img {width: 100%; display: block;}
+.flexslider .slides:after { content: "\0020"; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .flexslider .slides {display: block;}
+* html .flexslider .slides { height: 1%;}
+.no-js .flexslider .slides > li:first-child { display: block;}
 /* ====================================================================================================================
  * DEFAULT THEME
  * ====================================================================================================================*/
@@ -90,29 +53,12 @@ html[xmlns] .flexslider .slides {
   -o-box-shadow: '' 0 1px 4px rgba(0, 0, 0, 0.2);
   box-shadow: '' 0 1px 4px rgba(0, 0, 0, 0.2);*/
 }
-.flexslider .slides {
-  zoom: 1;
-}
-.flexslider .slides img {
-  height: auto;
-}
-.flex-viewport {
-  max-height: 2000px;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
-}
-.loading .flex-viewport {
-  max-height: 300px;
-}
-.carousel li {
-  margin-right: 5px;
-}
-.flex-direction-nav {
-  *height: 0;
-}
+.flexslider .slides { zoom: 1;}
+.flexslider .slides img { height: auto;}
+.flex-viewport { max-height: 2000px;-webkit-transition: all 1s ease; -moz-transition: all 1s ease;-ms-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease;}
+.loading .flex-viewport { max-height: 300px;}
+.carousel li { margin-right: 5px;}
+.flex-direction-nav { *height: 0;}
 .flex-direction-nav a {
   text-decoration: none;
   display: block;
@@ -125,7 +71,7 @@ html[xmlns] .flexslider .slides {
   overflow: hidden;
   opacity: 0;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -138,38 +84,17 @@ html[xmlns] .flexslider .slides {
   font-size: 40px;
   display: inline-block;
   content: '\f001';
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
-.flex-direction-nav a.flex-next:before {
-  content: '\f002';
-}
-.flex-direction-nav .flex-prev {
-  left: -50px;
-}
-.flex-direction-nav .flex-next {
-  right: -50px;
-  text-align: right;
-}
-.flexslider:hover .flex-direction-nav .flex-prev {
-  opacity: 0.7;
-  left: 10px;
-}
-.flexslider:hover .flex-direction-nav .flex-prev:hover {
-  opacity: 1;
-}
-.flexslider:hover .flex-direction-nav .flex-next {
-  opacity: 0.7;
-  right: 10px;
-}
-.flexslider:hover .flex-direction-nav .flex-next:hover {
-  opacity: 1;
-}
-.flex-direction-nav .flex-disabled {
-  opacity: 0!important;
-  filter: alpha(opacity=0);
-  cursor: default;
-}
+.flex-direction-nav a.flex-next:before { content: '\f002';}
+.flex-direction-nav .flex-prev { left: -50px;}
+.flex-direction-nav .flex-next { right: -50px; text-align: right;}
+.flexslider:hover .flex-direction-nav .flex-prev { opacity: 0.7; left: 10px;}
+.flexslider:hover .flex-direction-nav .flex-prev:hover { opacity: 1;}
+.flexslider:hover .flex-direction-nav .flex-next { opacity: 0.7; right: 10px;}
+.flexslider:hover .flex-direction-nav .flex-next:hover { opacity: 1;}
+.flex-direction-nav .flex-disabled { opacity: 0!important; filter: alpha(opacity=0); cursor: default;}
 .flex-pauseplay a {
   display: block;
   width: 20px;
@@ -212,7 +137,7 @@ html[xmlns] .flexslider .slides {
   height: 11px;
   display: block;
   background: #666;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   text-indent: -9999px;
   -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
@@ -225,11 +150,11 @@ html[xmlns] .flexslider .slides {
 }
 .flex-control-paging li a:hover {
   background: #333;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.7);
 }
 .flex-control-paging li a.flex-active {
   background: #000;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(164, 41, 41, 1);
   cursor: default;
 }
 .flex-control-thumbs {
