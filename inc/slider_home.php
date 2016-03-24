@@ -1,6 +1,19 @@
  <div class="flexslider">
   <ul class="slides">
     <li>
+       <img src="img/gallery/sanMiniato01.png" />
+       <div class="overlayDiv">
+        <div class="container">
+          <h1>SanMiniato</h1>
+          <p>Centro storico</p>
+          <div class="containerFooter">
+
+          </div>
+         </div>
+
+       </div>
+    </li>
+    <li>
      <img src="img/gallery/smm_veduta_aerea.png" />
      <div class="overlayDiv">
       <div class="container">
@@ -24,6 +37,32 @@
         </div>
        </div>
       </div>
+    </li>
+    <li>
+       <img src="img/gallery/orentano_piroga.png" />
+       <div class="overlayDiv">
+        <div class="container">
+          <h1>Orentano</h1>
+          <p>Piroga monossile del secolo XI - Museo Archeologico</p>
+          <div class="containerFooter">
+
+          </div>
+         </div>
+
+       </div>
+    </li>
+    <li>
+       <img src="img/gallery/sanMiniato02.png" />
+       <div class="overlayDiv">
+        <div class="container">
+          <h1>SanMiniato</h1>
+          <p>Centro storico</p>
+          <div class="containerFooter">
+
+          </div>
+         </div>
+
+       </div>
     </li>
     <li>
       <img src="img/gallery/01.png" />
