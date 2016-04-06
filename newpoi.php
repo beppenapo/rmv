@@ -405,7 +405,7 @@ var styleSito = new OpenLayers.StyleMap({
      fillColor: "#427109",
      fillOpacity: 1,
      strokeWidth: 2,
-     strokeColor: "#72B51E"
+     strokeColor: "#72B51E",
     }
    })
   ]
@@ -451,6 +451,35 @@ punti = new OpenLayers.Layer.Vector("wfs", {
 });
 map.addLayer(punti);
 //punti.setVisibility(false);
+
+var report = function(e) { OpenLayers.Console.log(e.type, e.feature.id); };
+var highlightCtrl = new OpenLayers.Control.SelectFeature(punti, {
+    hover: true
+    ,highlightOnly: true
+    ,renderIntent: "temporary"
+    ,eventListeners: {beforefeaturehighlighted: report, featurehighlighted: report,featureunhighlighted: report}
+});
+var selectCtrl = new OpenLayers.Control.SelectFeature(punti, {clickout: true});
+map.addControl(highlightCtrl);
+map.addControl(selectCtrl);
+highlightCtrl.activate();
+selectCtrl.activate();
+
+
+punti.events.on({ 
+    featureselected: function(event) {
+            var feature = event.feature;
+            feature.popup = new OpenLayers.Popup.FramedCloud("box",
+                    feature.geometry.getBounds().getCenterLonLat(),
+                    null,
+                    '<div>'+feature.attributes.sito_nome+'</div>',
+                    null,
+                    true
+            );
+            while( map.popups.length ) { map.removePopup( map.popups[0] ); }
+            map.addPopup(feature.popup);
+     }
+});
 
 // add the custom editing toolbar
  navigate = new OpenLayers.Control.DragPan({
