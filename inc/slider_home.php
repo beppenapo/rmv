@@ -1,7 +1,7 @@
  <div class="flexslider">
   <ul class="slides">
     <li>
-       <img src="img/gallery/sanMiniato01.png" />
+       <img src="img/gallery/sanMiniato01.jpg" />
        <div class="overlayDiv">
         <div class="container">
           <h1>SanMiniato</h1>
@@ -14,7 +14,7 @@
        </div>
     </li>
     <li>
-     <img src="img/gallery/smm_veduta_aerea.png" />
+     <img src="img/gallery/smm_veduta_aerea.jpg" />
      <div class="overlayDiv">
       <div class="container">
         <h1>Santa Maria a Monte</h1>
@@ -27,7 +27,7 @@
      </div>
     </li>
     <li>
-      <img src="img/gallery/02.png" />
+      <img src="img/gallery/02.jpg" />
       <div class="overlayDiv">
        <div class="container">
         <h1>Montopoli Val d'Arno</h1>
@@ -39,7 +39,20 @@
       </div>
     </li>
     <li>
-       <img src="img/gallery/orentano_piroga.png" />
+       <img src="img/gallery/smm01.jpg" />
+       <div class="overlayDiv">
+        <div class="container">
+          <h1>Santa Maria a Monte</h1>
+          <p>Il centro storico visto dai piedi del colle</p>
+          <div class="containerFooter">
+
+          </div>
+         </div>
+
+       </div>
+    </li>
+    <li>
+       <img src="img/gallery/orentano_piroga.jpg" />
        <div class="overlayDiv">
         <div class="container">
           <h1>Orentano</h1>
@@ -52,7 +65,7 @@
        </div>
     </li>
     <li>
-       <img src="img/gallery/sanMiniato02.png" />
+       <img src="img/gallery/sanMiniato02.jpg" />
        <div class="overlayDiv">
         <div class="container">
           <h1>SanMiniato</h1>
@@ -65,7 +78,20 @@
        </div>
     </li>
     <li>
-      <img src="img/gallery/01.png" />
+       <img src="img/gallery/smm02.jpg" />
+       <div class="overlayDiv">
+        <div class="container">
+          <h1>Santa Maria a Monte</h1>
+          <p>Il panorama dalla Torre dell'Orologio</p>
+          <div class="containerFooter">
+
+          </div>
+         </div>
+
+       </div>
+    </li>
+    <li>
+      <img src="img/gallery/01.jpg" />
       <div class="overlayDiv">
        <div class="container">
         <h1>Castelfranco di Sotto</h1>
@@ -77,7 +103,7 @@
       </div>
     </li>
     <li>
-      <img src="img/gallery/san_miniato_foto_aerea.png" />
+      <img src="img/gallery/san_miniato_foto_aerea.jpg" />
       <div class="overlayDiv">
        <div class="container">
         <h1>San Miniato</h1>
@@ -89,7 +115,7 @@
       </div>
     </li>
     <li>
-      <img src="img/gallery/montopoli_arco_torre.png" />
+      <img src="img/gallery/montopoli_arco_torre.jpg" />
       <div class="overlayDiv">
        <div class="container">
         <h1>Montopoli Val D'Arno</h1>
@@ -101,7 +127,7 @@
       </div>
     </li>
     <li>
-      <img src="img/gallery/04.png" />
+      <img src="img/gallery/04.jpg" />
       <div class="overlayDiv">
        <div class="container">
         <h1>Orentano</h1>
@@ -113,7 +139,7 @@
       </div>
     </li>
     <li>
-      <img src="img/gallery/05.png" />
+      <img src="img/gallery/05.jpg" />
       <div class="overlayDiv">
        <div class="container">
         <h1>Castelfranco di Sotto</h1>
