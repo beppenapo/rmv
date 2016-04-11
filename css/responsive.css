@@ -47,7 +47,7 @@ footer #navFooter a{border-bottom:1px dotted;}
 footer #navFooter li{width:15%;}
 footer #social{margin:10px 0px;}
 .wrapContent{margin:0 auto;width:95%;}
-.intro{position:relative;display:inline-block;width:100%;margin:0px;box-shadow: 0 0px 30px rgba(0,0,0,1); background:url("../img/introBg.png") no-repeat center center; background-size: cover;}
+.intro{position:relative;display:inline-block;width:100%;margin:0px;box-shadow: 0 0px 30px rgba(0,0,0,1); background:url("../img/introBg.jpg") no-repeat center center; background-size: cover;}
 .intro .colDx{position:relative;margin:4% auto;color:#fff;font-size:1em;line-height:1.5;}
 #mainContent{margin:20px auto;}
 #mainContentWrap section{margin:10px 0px;}
