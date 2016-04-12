@@ -1,13 +1,15 @@
 {
 	"token": {
 		"MUSEI":"NETWORK MUSEUM",
-		"mappa":"map",
+		"percorsi":"map",
 		"accedi alla mappa":"view map",
 		"punti":"poi",
 		"visualizza la lista completa dei punti di interesse":"view all point of interest",
-		"La mappa":"Map",
-		"Il database":"Database",
-		"Il progetto":"About the project"
+		"Alla scoperta del Valdarno":"Discovery of Valdarno",
+		"I punti di interesse":"Point of interest",
+		"percorsi turistico-culturali":"map",
+		"Il progetto":"About the project",
+		"accedi":"read more"
 		
 	},
 	"regex": [

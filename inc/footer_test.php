@@ -22,7 +22,7 @@
   <nav>
    <ul>
     <li><a href="index.php" title="torna alla pagina iniziale del sito">home</a></li>
-    <li><a href="mappa.php" lang="it" title="accedi alla mappa">mappa</a></li>
+    <li><a href="mappa.php" lang="it" title="accedi alla mappa">percorsi</a></li>
     <li><a href="poiList.php" title="visualizza la lista completa dei punti di interesse" lang="it">punti</a></li>
     <li><a href="" title="crediti e ringraziamenti">credits</a></li>
    </ul>
