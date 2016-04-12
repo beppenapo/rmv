@@ -237,7 +237,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
 
  <div style="clear:both !important;"></div>
 </div> <!-- wrapMain -->
- <footer><?php require_once("inc/footer_test.php"); ?></footer>
+ <footer><?php require_once("inc/footer.php"); ?></footer>
 
 
 
@@ -470,7 +470,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
         <div class="myDialogContent" style="height:300px !important;">
             <div class="myDialogContentHeader"><i class="fa fa-times"></i></div>
             <div class="myDialogContentMain">
-                <form action="inc/upload_file.php" method="post" enctype="multipart/form-data" id="formFoto">
+                <form action="upload_file.php" method="post" enctype="multipart/form-data" id="formFoto">
                     <input type="hidden" name="poiFoto" value="<?php echo($id);?>" />
                     <input type="file" name="file" id="file">
                     <textarea name="descrFoto" placeholder="Inserisci una breve descrizione dell'immagine"></textarea>

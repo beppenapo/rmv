@@ -87,7 +87,7 @@ $classe = ($_SESSION['classe'] == 1)
 <div style="clear:both !important;"></div>
 
 </div><!-- wrap -->
-<footer><?php require_once("inc/footer_test.php"); ?></footer>
+<footer><?php require_once("inc/footer.php"); ?></footer>
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/fade-plugin.js"></script>

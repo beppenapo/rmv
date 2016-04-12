@@ -129,7 +129,7 @@ select { margin: 0; background: #fff; outline: none; display: inline-block;curso
  <div style="clear:both !important;"></div>
 
  </div>
-  <footer><?php require_once("inc/footer_test.php"); ?></footer>
+  <footer><?php require_once("inc/footer.php"); ?></footer>
 
 
  <div class="myDialog">

@@ -116,7 +116,7 @@ $row5= pg_num_rows($res5);
 
  <div style="clear:both !important;"></div>
 </div> <!-- wrapMain -->
- <footer><?php require_once("inc/footer_test.php"); ?></footer>
+ <footer><?php require_once("inc/footer.php"); ?></footer>
 
 
 <script type="text/javascript" src="js/jquery.js"></script>

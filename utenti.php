@@ -127,7 +127,7 @@ $result=pg_query($connection, $query);
 <div style="clear:both !important;"></div>
 
 </div>
- <footer><?php require_once("inc/footer_test.php"); ?></footer>
+ <footer><?php require_once("inc/footer.php"); ?></footer>
 
 
 <div class="myDialog">
