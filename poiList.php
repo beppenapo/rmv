@@ -7,7 +7,7 @@ FROM sito, liste.localita, comuni, liste.sito_tipo, liste.definizione_specifica,
 WHERE sito.id_comune = comuni.gid AND sito.id_sito_tipo = sito_tipo.id_sito_tipo AND sito.id_def_specifica = definizione_specifica.id_def_specifica AND sito.id_periodo = periodo_cultura.id_periodo_cultura AND sito.id_accessibilita = accessibilita.id_accessibilita order by comune asc, data_compilazione desc, poi asc;");
 $result=pg_query($connection, $query);
 $row = pg_num_rows($result);
-$header = (!$row) ? 'Non sono presenti punti di interesse nel database ' : 'Lista completa dei puti di interesse presenti nel database ('.$row.')';
+$header = (!$row) ? 'Non sono presenti punti di interesse nel database ' : 'Lista completa dei punti di interesse presenti nel database ('.$row.')';
 //filtro comune
 $q2=("SELECT distinct c.gid, c.nome AS comune FROM comuni c, sito where sito.id_comune = c.gid order by comune asc;");
 $res2=pg_query($connection, $q2);

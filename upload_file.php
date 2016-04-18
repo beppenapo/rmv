@@ -37,7 +37,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
 }else{
     echo "File non valido o non selezionato!";
 }
-//header("Refresh: 3; URL=../poi.php?id=".$id);
+header("Refresh: 5; URL=../poi.php?id=".$id);
 ?>
 <!DOCTYPE html>
 <html lang="it">
