@@ -101,6 +101,7 @@ while($aList = pg_fetch_array($aa)){
     <script src="js/lang/js/jquery-cookie.js" charset="utf-8" type="text/javascript"></script>
     <script src="js/lang/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
     <script type="text/javascript" src="js/openlayers/lib/OpenLayers.js"></script>
+    <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyAjIFKh5283gkT3TEdbrjxzm1-sFQppG1Y" type="text/javascript"></script>
     <script type="text/javascript" src="js/func.js"></script>
     <script type="text/javascript"  src="js/map.js"></script>

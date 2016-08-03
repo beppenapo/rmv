@@ -101,7 +101,8 @@ arrayOSM = ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
             "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"];
 
-baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, {transitionEffect: "resize"});
+//baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, {transitionEffect: "resize"});
+baseOSM = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
 map.addLayer(baseOSM);
 
 gsat = new OpenLayers.Layer.Google("Hybrid", {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22});
