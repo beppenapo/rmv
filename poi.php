@@ -534,6 +534,7 @@ if(isset($arr['nctn'])){$inv = $arr['nctn'];}
 <script src="js/lang/js/jquery-cookie.js" charset="utf-8" type="text/javascript"></script>
 <script src="js/lang/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
 <script type="text/javascript" src="js/ol2.13/OpenLayers.js"></script>
+<script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
 <script type="text/javascript" src="js/func.js"></script>
 <script type="text/javascript" src="js/dinSelect.js"></script>
 <script type="text/javascript">
@@ -718,12 +719,9 @@ function init() {
  });
 
 
-arrayOSM = ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
-            "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
-            "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
-            "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"];
-
-baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, {transitionEffect: "resize"});
+//arrayOSM = ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg","http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"];
+//baseOSM = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, {transitionEffect: "resize"});
+baseOSM = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
 map.addLayer(baseOSM);
 
 var params = {srs: 'EPSG:3857',layers: 'rete:poi_rete',format: 'image/png',tiled: 'true',transparent: true , cql_filter:'id_poi=<?php echo($id); ?>'}
